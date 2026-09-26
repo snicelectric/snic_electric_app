@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Órdenes de servicio | SNIC'ELECTRIC</title>
+<link rel="icon" href="https://github.com/Francisco1824/proyectosnicelectric/blob/main/img/logo.png?raw=true" />
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/responsive.css">
+<link rel="stylesheet" href="../css/ordenes.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="../css/app-v2.css">
+
+</head>
+<body>
+<div class="app-shell">
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo"><img src="https://github.com/Francisco1824/proyectosnicelectric/blob/main/img/logo.png?raw=true" alt="SNIC'ELECTRIC"><div><strong>SNIC'ELECTRIC</strong><span>Administración</span></div></div>
+  <nav class="sidebar-nav">
+    <a href="../dashboard.html" class="nav-item" data-permission="inicio.ver"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
+    <a href="clientes.html" class="nav-item" data-permission="clientes.ver"><i class="fa-solid fa-users"></i><span>Clientes</span></a>
+    <a href="inventario.html" class="nav-item" data-permission="inventario.ver"><i class="fa-solid fa-boxes-stacked"></i><span>Inventario</span></a>
+    <a href="cotizaciones.html" class="nav-item" data-permission="cotizaciones.ver"><i class="fa-solid fa-file-signature"></i><span>Cotizaciones</span></a>
+    <a href="facturas.html" class="nav-item" data-permission="facturas.ver"><i class="fa-solid fa-file-invoice-dollar"></i><span>Facturas</span></a>
+    <a href="ordenes.html" class="nav-item active" data-permission="ordenes.ver"><i class="fa-solid fa-clipboard-list"></i><span>Órdenes de servicio</span></a>
+    <a href="inspecciones.html" class="nav-item" data-permission="inspecciones.ver"><i class="fa-solid fa-magnifying-glass-chart"></i><span>Inspecciones</span></a>
+    <a href="informe-obra.html" class="nav-item" data-permission="informe_obra.ver"><i class="fa-solid fa-file-lines"></i><span>Informe de obra</span></a>
+    <a href="informes.html" class="nav-item" data-permission="informes.ver"><i class="fa-solid fa-chart-column"></i><span>Informes</span></a>
+    <div class="nav-divider"></div>
+    <a href="administracion.html" class="nav-item" data-permission="administracion.ver"><i class="fa-solid fa-user-shield"></i><span>Administración</span></a>
+    <a href="configuracion.html" class="nav-item" data-permission="configuracion.ver"><i class="fa-solid fa-gear"></i><span>Configuración</span></a>
+  </nav>
+  <div class="sidebar-bottom"><button type="button" class="logout-button" data-logout><i class="fa-solid fa-right-from-bracket"></i><span>Cerrar sesión</span></button></div>
+</aside>
+<main class="main-content">
+
+    <header class="topbar">
+        <button type="button" class="menu-toggle" data-menu-toggle aria-label="Abrir menú"><i class="fa-solid fa-bars"></i></button>
+        <div class="topbar-title"><span>Gestión administrativa</span><h1>Órdenes de servicio</h1></div>
+        <div class="topbar-user">
+            <div class="topbar-user-info"><strong data-user-name>Usuario</strong><span data-user-role>-</span></div>
+            <div class="user-avatar" id="topbarAvatar" aria-label="Avatar del usuario">US</div>
+        </div>
+    </header>
+
+  <section class="content">
+  <div class="page-head"><div><span class="section-label">GESTIÓN OPERATIVA</span><h2>Órdenes de servicio</h2><p>Convierte cotizaciones aprobadas en trabajos programados y controla su ejecución.</p></div><button class="btn btn-primary" id="btnNuevaOS" type="button"><i class="fa-solid fa-plus"></i> Nueva orden</button></div>
+  <div class="stats">
+    <article><div class="stat-icon blue"><i class="fa-solid fa-clipboard-list"></i></div><div><small>Total órdenes</small><strong id="statTotal">0</strong></div></article>
+    <article><div class="stat-icon yellow"><i class="fa-solid fa-clock"></i></div><div><small>Pendientes</small><strong id="statPendientes">0</strong></div></article>
+    <article><div class="stat-icon orange"><i class="fa-solid fa-person-digging"></i></div><div><small>En ejecución</small><strong id="statEjecucion">0</strong></div></article>
+    <article><div class="stat-icon green"><i class="fa-solid fa-circle-check"></i></div><div><small>Finalizadas</small><strong id="statFinalizadas">0</strong></div></article>
+  </div>
+  <div class="panel">
+    <div class="filters"><div class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="buscarOS" placeholder="Buscar por número, cliente o documento..."></div><select id="filtroEstado"><option value="">Todos los estados</option><option value="pendiente">Pendiente</option><option value="programada">Programada</option><option value="ejecucion">En ejecución</option><option value="finalizada">Finalizada</option><option value="cancelada">Cancelada</option></select><select id="filtroPrioridad"><option value="">Todas las prioridades</option><option value="normal">Normal</option><option value="alta">Alta</option><option value="urgente">Urgente</option></select></div>
+    <div class="table-wrap"><table><thead><tr><th>ORDEN</th><th>CLIENTE</th><th>COTIZACIÓN</th><th>FECHA</th><th>RESPONSABLE</th><th>PRIORIDAD</th><th>ESTADO</th><th>ACCIONES</th></tr></thead><tbody id="tablaOS"></tbody></table><div class="empty" id="emptyOS" hidden><i class="fa-solid fa-clipboard-list"></i><h3>No hay órdenes de servicio</h3><p>Las cotizaciones aprobadas aparecerán disponibles para crear una orden.</p><button class="btn btn-primary" id="btnCrearPrimera" type="button">Crear orden</button></div></div>
+  </div>
+</section></main></div>
+
+<div class="modal" id="osModal" aria-hidden="true"><div class="modal-card large"><div class="modal-head"><div><span class="section-label">ORDEN DE SERVICIO</span><h3 id="modalTitulo">Nueva orden</h3></div><button class="icon-close" id="btnCerrarModal" type="button">×</button></div><form id="osForm">
+<input type="hidden" id="osId">
+<div class="form-grid three"><label>Cotización aprobada<select id="cotizacionOS"><option value="">Seleccionar cotización...</option></select></label><label>Cliente<select id="clienteOS" required><option value="">Seleccionar cliente...</option></select></label><label>Prioridad<select id="prioridadOS"><option value="normal">Normal</option><option value="alta">Alta</option><option value="urgente">Urgente</option></select></label></div>
+<div class="form-grid three"><label>Fecha programada<input type="date" id="fechaOS" required></label><label>Hora<input type="time" id="horaOS"></label><label>Responsable / técnico<select id="responsableOS" required><option value="">Seleccionar técnico...</option></select></label></div>
+<div class="form-grid two"><label>Dirección de la obra<input type="text" id="direccionOS" placeholder="Dirección del servicio"></label><label>Contacto en obra<input type="text" id="contactoOS" placeholder="Nombre y teléfono"></label></div>
+<label>Descripción del trabajo<textarea id="descripcionOS" rows="3" placeholder="Describe el trabajo que se realizará..."></textarea></label>
+<div class="subhead">
+  <h4>Conceptos de la orden</h4>
+  <div class="btn-group">
+    <select id="servicioOS" class="select-inline"><option value="">Seleccionar catálogo...</option></select>
+    <button class="btn btn-light" id="btnAgregarServicio" type="button"><i class="fa-solid fa-plus"></i> Desde catálogo</button>
+    <button class="btn btn-light" id="btnAgregarLibre" type="button"><i class="fa-solid fa-plus"></i> Concepto libre</button>
+  </div>
+</div>
+<div class="items-wrap"><table class="items"><thead><tr><th>DESCRIPCIÓN</th><th>UNIDAD</th><th>CANT.</th><th>PRECIO UNIT.</th><th>SUBTOTAL</th><th>OBSERVACIÓN</th><th></th></tr></thead><tbody id="itemsOS"></tbody></table><div class="items-empty" id="itemsEmpty">Los conceptos de la cotización o agregados aparecerán aquí.</div></div>
+<div class="order-summary-bar">
+  <div><span>Items: <strong id="totalItemsCount">0</strong></span></div>
+  <div><span>Monto Total Estimado: <strong id="totalMontoEstimado">$ 0</strong></span></div>
+</div>
+<label>Observaciones<textarea id="observacionesOS" rows="3" placeholder="Observaciones, instrucciones o condiciones del servicio..."></textarea></label>
+<div class="modal-actions"><button class="btn btn-light" id="btnCancelar" type="button">Cancelar</button><button class="btn btn-primary" type="submit"><i class="fa-solid fa-floppy-disk"></i> Guardar orden</button></div>
+</form></div></div>
+
+<div class="modal" id="detalleModal" aria-hidden="true"><div class="modal-card"><div class="modal-head"><div><span class="section-label">DETALLE</span><h3 id="detalleTitulo">Orden</h3></div><button class="icon-close" id="btnCerrarDetalle" type="button">×</button></div><div id="detalleContenido"></div><div class="modal-actions"><button class="btn btn-light" id="btnCerrarDetalle2" type="button">Cerrar</button><button class="btn btn-light" id="btnImprimirOS" type="button"><i class="fa-solid fa-print"></i> Imprimir / PDF</button><button class="btn btn-primary" id="btnEditarDesdeDetalle" type="button"><i class="fa-solid fa-pen"></i> Editar</button></div></div></div>
+
+<div class="modal" id="estadoModal" aria-hidden="true"><div class="modal-card small"><div class="modal-head"><h3>Cambiar estado</h3><button class="icon-close" id="btnCerrarEstado" type="button">×</button></div><input type="hidden" id="estadoOSId"><label>Nuevo estado<select id="nuevoEstado"><option value="pendiente">Pendiente</option><option value="programada">Programada</option><option value="ejecucion">En ejecución</option><option value="finalizada">Finalizada</option><option value="cancelada">Cancelada</option></select></label><div class="modal-actions"><button class="btn btn-light" id="btnCancelarEstado" type="button">Cancelar</button><button class="btn btn-primary" id="btnGuardarEstado" type="button">Guardar estado</button></div></div></div>
+<div class="toast" id="toast"><i id="toastIcon"></i><span id="toastMessage"></span></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-client.js"></script>
+    <script src="../js/auth.js?v=35"></script>
+    <script src="../js/ordenes.js"></script>
+</body></html>

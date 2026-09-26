@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Configuración | SNIC'ELECTRIC</title>
+  <link rel="icon" href="https://github.com/Francisco1824/proyectosnicelectric/blob/main/img/logo.png?raw=true" />
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/app-v2.css">
+  <link rel="stylesheet" href="../css/configuracion.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+<div class="app-shell">
+    <!-- =================================================
+        SIDEBAR
+    ================================================== -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo"><img src="https://github.com/Francisco1824/proyectosnicelectric/blob/main/img/logo.png?raw=true" alt="SNIC'ELECTRIC"><div><strong>SNIC'ELECTRIC</strong><span>Administración</span></div></div>
+            <nav class="sidebar-nav">
+                <a href="../dashboard.html" class="nav-item" data-permission="inicio.ver"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
+                <a href="clientes.html" class="nav-item" data-permission="clientes.ver"><i class="fa-solid fa-users"></i><span>Clientes</span></a>
+                <a href="inventario.html" class="nav-item" data-permission="inventario.ver"><i class="fa-solid fa-boxes-stacked"></i><span>Inventario</span></a>
+                <a href="cotizaciones.html" class="nav-item" data-permission="cotizaciones.ver"><i class="fa-solid fa-file-signature"></i><span>Cotizaciones</span></a>
+                <a href="facturas.html" class="nav-item" data-permission="facturas.ver"><i class="fa-solid fa-file-invoice-dollar"></i><span>Facturas</span></a>
+                <a href="ordenes.html" class="nav-item" data-permission="ordenes.ver"><i class="fa-solid fa-clipboard-list"></i><span>Órdenes de servicio</span></a>
+                <a href="inspecciones.html" class="nav-item" data-permission="inspecciones.ver"><i class="fa-solid fa-magnifying-glass-chart"></i><span>Inspecciones</span></a>
+                <a href="informe-obra.html" class="nav-item" data-permission="informe_obra.ver"><i class="fa-solid fa-file-lines"></i><span>Informe de obra</span></a>
+                <a href="informes.html" class="nav-item" data-permission="informes.ver"><i class="fa-solid fa-chart-column"></i><span>Informes</span></a>
+            <div class="nav-divider"></div>
+                <a href="administracion.html" class="nav-item" data-permission="administracion.ver"><i class="fa-solid fa-user-shield"></i><span>Administración</span></a>
+                <a href="configuracion.html" class="nav-item active" data-permission="configuracion.ver"><i class="fa-solid fa-gear"></i><span>Configuración</span></a>
+            </nav>
+        <div class="sidebar-bottom"><button type="button" class="logout-button" data-logout><i class="fa-solid fa-right-from-bracket"></i><span>Cerrar sesión</span></button></div>
+    </aside>
+
+<main class="main-content">
+
+    <!-- =================================================
+         TOPBAR
+    ================================================== -->
+    <header class="topbar">
+        <button type="button" class="menu-toggle" data-menu-toggle aria-label="Abrir menú"><i class="fa-solid fa-bars"></i></button>
+        <div class="topbar-title"><span>Gestión administrativa</span><h1>Configuración</h1></div>
+        <div class="topbar-user">
+            <div class="topbar-user-info"><strong data-user-name>Cargando...</strong><span data-user-role>-</span></div>
+            <div class="user-avatar" id="topbarAvatar" aria-label="Avatar del usuario">SE</div>
+        </div>
+    </header>
+
+<section class="config-page">
+  <div class="config-head">
+    <div>
+      <span class="section-label">CONFIGURACIÓN</span>
+      <h2>Configuración del sistema</h2>
+      <p>Administra los datos y preferencias generales de SNIC'ELECTRIC.</p>
+    </div>
+    <div class="config-head-actions">
+      <button class="btn-secondary" type="button" id="btnRestaurar"><i class="fa-solid fa-rotate-left"></i> Recargar</button>
+      <button class="btn-primary" type="button" id="btnGuardar"><i class="fa-solid fa-floppy-disk"></i> Guardar cambios</button>
+    </div>
+  </div>
+
+  <form id="configForm" autocomplete="off">
+    <div class="config-grid">
+
+      <!-- DATOS DE LA EMPRESA -->
+      <article class="config-card">
+        <div class="config-card-title">
+          <div class="config-icon blue"><i class="fa-solid fa-building"></i></div>
+          <div><h3>Datos de la empresa</h3><p>Información almacenada en Supabase para documentos y reportes.</p></div>
+        </div>
+        <div class="config-form-grid">
+          <label>Nombre comercial<input id="empresaNombre" type="text" maxlength="120" required></label>
+          <label>NIT / Documento<input id="empresaNit" type="text" maxlength="40"></label>
+          <label>Teléfono<input id="empresaTelefono" type="text" maxlength="40"></label>
+          <label>Correo<input id="empresaCorreo" type="email" maxlength="120"></label>
+          <label>Ciudad<input id="empresaCiudad" type="text" maxlength="80"></label>
+          <label>Departamento<input id="empresaDepartamento" type="text" maxlength="80"></label>
+          <label class="full">Dirección<input id="empresaDireccion" type="text" maxlength="180"></label>
+          <label class="full">Descripción / eslogan<input id="empresaDescripcion" type="text" maxlength="180"></label>
+        </div>
+      </article>
+
+      <!-- DOCUMENTOS Y FACTURACIÓN -->
+      <article class="config-card">
+        <div class="config-card-title">
+          <div class="config-icon yellow"><i class="fa-solid fa-file-pdf"></i></div>
+          <div><h3>Documentos y facturación</h3><p>Preferencias de cotizaciones, facturas y porcentajes.</p></div>
+        </div>
+        <div class="config-form-grid">
+          <label>Moneda
+            <select id="moneda">
+              <option value="COP">Peso colombiano (COP)</option>
+              <option value="USD">Dólar (USD)</option>
+            </select>
+          </label>
+          <label>IVA (%)
+            <input id="iva" type="number" min="0" max="100" step="0.01">
+          </label>
+          <label>Prefijo cotizaciones<input id="prefijoCotizacion" maxlength="10"></label>
+          <label>Prefijo facturas<input id="prefijoFactura" maxlength="10"></label>
+          <label class="full checkbox-row"><input id="mostrarLogoPdf" type="checkbox"><span>Mostrar el logo de SNIC'ELECTRIC en documentos PDF</span></label>
+          <label class="full">Pie de documento<textarea id="pieDocumento" rows="3" maxlength="300"></textarea></label>
+        </div>
+      </article>
+
+      <!-- RESPALDOS Y DATOS -->
+      <article class="config-card">
+        <div class="config-card-title">
+          <div class="config-icon green"><i class="fa-solid fa-database"></i></div>
+          <div><h3>Datos y respaldo</h3><p>Genera o restaura una copia local basada en los registros de Supabase.</p></div>
+        </div>
+        <div class="config-actions-grid">
+          <button type="button" class="config-action" id="btnExportar"><i class="fa-solid fa-download"></i><span><strong>Exportar respaldo</strong><small>Descarga un JSON con las tablas del sistema.</small></span></button>
+          <button type="button" class="config-action" id="btnImportar"><i class="fa-solid fa-upload"></i><span><strong>Importar respaldo</strong><small>Restaura configuraciones guardadas localmente.</small></span></button>
+          <input id="archivoRespaldo" type="file" accept=".json,application/json" hidden>
+        </div>
+        <div class="config-note"><i class="fa-solid fa-circle-info"></i> Los cambios de la empresa y prefijos se guardan y sincronizan automáticamente en la base de datos de Supabase.</div>
+      </article>
+
+      <!-- SEGURIDAD Y USUARIOS -->
+      <article class="config-card">
+        <div class="config-card-title">
+          <div class="config-icon dark"><i class="fa-solid fa-shield-halved"></i></div>
+          <div><h3>Seguridad y usuarios</h3><p>Información del usuario autenticado en la sesión activa.</p></div>
+        </div>
+        <div class="security-panel">
+          <div><span>Usuario actual</span><strong data-user-email>Cargando...</strong></div>
+          <div><span>Rol</span><strong data-user-role-card>Administrador</strong></div>
+          <div><span>Acceso</span><strong class="access-ok"><i class="fa-solid fa-circle-check"></i> Acceso autenticado</strong></div>
+        </div>
+        <a class="btn-primary config-admin-link" href="administracion.html"><i class="fa-solid fa-user-shield"></i> Administrar usuarios y permisos</a>
+      </article>
+
+    </div>
+  </form>
+
+  <div id="configToast" class="config-toast" role="status" aria-live="polite">
+    <i class="fa-solid fa-circle-check"></i><span id="configToastText">Cambios guardados.</span>
+  </div>
+</section>
+</main>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-client.js"></script>
+    <script src="../js/auth.js?v=35"></script>
+    <script src="../js/configuracion.js"></script>
+</body>
+</html>

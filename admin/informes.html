@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Informes de gestión - SNIC'ELECTRIC">
+<title>Informes | SNIC'ELECTRIC</title>
+<link rel="icon" href="https://github.com/Francisco1824/proyectosnicelectric/blob/main/img/logo.png?raw=true" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/responsive.css">
+<link rel="stylesheet" href="../css/informes.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="../css/app-v2.css">
+
+</head>
+<body>
+<div class="informes-app">
+        <!-- =================================================
+            SIDEBAR
+        ================================================== -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo"><img src="https://github.com/Francisco1824/proyectosnicelectric/blob/main/img/logo.png?raw=true" alt="SNIC'ELECTRIC"><div><strong>SNIC'ELECTRIC</strong><span>Administración</span></div></div>
+            <nav class="sidebar-nav">
+                <a href="../dashboard.html" class="nav-item" data-permission="inicio.ver"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
+                <a href="clientes.html" class="nav-item" data-permission="clientes.ver"><i class="fa-solid fa-users"></i><span>Clientes</span></a>
+                <a href="inventario.html" class="nav-item" data-permission="inventario.ver"><i class="fa-solid fa-boxes-stacked"></i><span>Inventario</span></a>
+                <a href="cotizaciones.html" class="nav-item" data-permission="cotizaciones.ver"><i class="fa-solid fa-file-signature"></i><span>Cotizaciones</span></a>
+                <a href="facturas.html" class="nav-item" data-permission="facturas.ver"><i class="fa-solid fa-file-invoice-dollar"></i><span>Facturas</span></a>
+                <a href="ordenes.html" class="nav-item" data-permission="ordenes.ver"><i class="fa-solid fa-clipboard-list"></i><span>Órdenes de servicio</span></a>
+                <a href="inspecciones.html" class="nav-item" data-permission="inspecciones.ver"><i class="fa-solid fa-magnifying-glass-chart"></i><span>Inspecciones</span></a>
+                <a href="informe-obra.html" class="nav-item" data-permission="informe_obra.ver"><i class="fa-solid fa-file-lines"></i><span>Informe de obra</span></a>
+                <a href="informes.html" class="nav-item active" data-permission="informes.ver"><i class="fa-solid fa-chart-column"></i><span>Informes</span></a>
+            <div class="nav-divider"></div>
+                <a href="administracion.html" class="nav-item" data-permission="administracion.ver"><i class="fa-solid fa-user-shield"></i><span>Administración</span></a>
+                <a href="configuracion.html" class="nav-item" data-permission="configuracion.ver"><i class="fa-solid fa-gear"></i><span>Configuración</span></a>
+            </nav>
+        <div class="sidebar-bottom"><button type="button" class="logout-button" data-logout><i class="fa-solid fa-right-from-bracket"></i><span>Cerrar sesión</span></button></div>
+    </aside>
+<main class="main-content">
+
+  <!-- =================================================
+         TOPBAR
+    ================================================== -->
+
+    <header class="topbar">
+        <button type="button" class="menu-toggle" data-menu-toggle aria-label="Abrir menú"><i class="fa-solid fa-bars"></i></button>
+        <div class="topbar-title"><span>Gestión administrativa</span><h1>Informes</h1></div>
+        <div class="topbar-user">
+            <div class="topbar-user-info"><strong data-user-name>Usuario</strong><span data-user-role>-</span></div>
+            <div class="user-avatar" id="topbarAvatar" aria-label="Avatar del usuario">US</div>
+        </div>
+    </header>
+
+<section class="page-content">
+  <div class="page-heading">
+    <div>
+      <span class="eyebrow">GESTIÓN Y REPORTES</span>
+      <h2>Informes</h2>
+      <p>Consulta el comportamiento comercial, operativo y financiero de SNIC'ELECTRIC por mes o trimestre.</p>
+    </div>
+    <div class="heading-actions">
+      <button type="button" class="btn-secondary" id="btnActualizar"><i class="fa-solid fa-rotate"></i> Actualizar</button>
+      <button type="button" class="btn-primary" id="btnImprimir"><i class="fa-solid fa-print"></i> Imprimir / PDF</button>
+    </div>
+  </div>
+
+  <div class="report-controls">
+    <div class="control-field"><label for="tipoInforme">Tipo de informe</label>
+      <select id="tipoInforme">
+        <option value="general">Resumen general</option>
+        <option value="comercial">Informe comercial</option>
+        <option value="operativo">Informe operativo</option>
+        <option value="financiero">Informe financiero</option>
+        <option value="inventario">Informe de inventario</option>
+      </select>
+    </div>
+    <div class="control-field"><label for="periodoInforme">Periodo</label>
+      <select id="periodoInforme">
+        <option value="mes">Mensual</option>
+        <option value="trimestre">Trimestral</option>
+        <option value="todo">Todo el historial</option>
+      </select>
+    </div>
+    <div class="control-field"><label for="fechaReferencia">Fecha de referencia</label><input type="date" id="fechaReferencia"></div>
+    <div class="period-label" id="periodoTexto">Periodo actual</div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-icon blue"><i class="fa-solid fa-users"></i></div><div><span>Clientes</span><strong id="statClientes">0</strong></div></div>
+    <div class="stat-card"><div class="stat-icon yellow"><i class="fa-solid fa-magnifying-glass-chart"></i></div><div><span>Inspecciones</span><strong id="statInspecciones">0</strong></div></div>
+    <div class="stat-card"><div class="stat-icon orange"><i class="fa-solid fa-file-signature"></i></div><div><span>Cotizaciones</span><strong id="statCotizaciones">0</strong></div></div>
+    <div class="stat-card"><div class="stat-icon green"><i class="fa-solid fa-dollar-sign"></i></div><div><span>Facturado</span><strong id="statFacturado">$ 0</strong></div></div>
+  </div>
+
+  <div class="report-grid">
+    <section class="panel">
+      <div class="panel-head"><div><span class="section-label">RESUMEN</span><h3 id="tituloResumen">Resumen general</h3></div><span class="period-badge" id="badgePeriodo">Mensual</span></div>
+      <div class="summary-grid" id="summaryGrid"></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><div><span class="section-label">ESTADOS</span><h3>Distribución del periodo</h3></div></div>
+      <div class="bars" id="statusBars"></div>
+    </section>
+  </div>
+
+  <div class="report-grid lower">
+    <section class="panel">
+      <div class="panel-head"><div><span class="section-label">ACTIVIDAD</span><h3>Detalle de registros</h3></div></div>
+      <div class="table-wrap"><table><thead><tr><th>TIPO</th><th>CANTIDAD</th><th>VALOR</th><th>ESTADO DESTACADO</th></tr></thead><tbody id="tablaActividad"></tbody></table></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><div><span class="section-label">INVENTARIO</span><h3>Resumen de existencias</h3></div></div>
+      <div class="inventory-summary" id="inventarioResumen"></div>
+    </section>
+  </div>
+
+  <section class="panel recent-panel">
+    <div class="panel-head"><div><span class="section-label">REGISTROS</span><h3>Últimos movimientos del periodo</h3></div></div>
+    <div class="table-wrap"><table><thead><tr><th>FECHA</th><th>TIPO</th><th>REFERENCIA</th><th>CLIENTE / DETALLE</th><th>VALOR</th><th>ESTADO</th></tr></thead><tbody id="tablaRecientes"></tbody></table><div class="empty" id="emptyRecientes" hidden><i class="fa-solid fa-chart-column"></i><h3>Sin registros</h3><p>No hay movimientos o documentos en el periodo seleccionado.</p></div></div>
+  </section>
+</section>
+</main>
+</div>
+
+<div class="toast" id="toast"><i id="toastIcon" class="fa-solid fa-circle-check"></i><span id="toastMessage"></span></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-client.js"></script>
+    <script src="../js/auth.js?v=35"></script>
+<script src="../js/informes.js"></script>
+</body>
+</html>

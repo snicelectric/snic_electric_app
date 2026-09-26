@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Facturas - SNIC'ELECTRIC"><title>Facturas | SNIC'ELECTRIC</title>
+    <link rel="icon" href="https://github.com/Francisco1824/proyectosnicelectric/blob/main/img/logo.png?raw=true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/facturas.css">
+    <link rel="stylesheet" href="../css/app-v2.css"> 
+
+</head>
+<body>
+    <div class="facturas-app">
+            <!-- =================================================
+            SIDEBAR
+        ================================================== -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo"><img src="https://github.com/Francisco1824/proyectosnicelectric/blob/main/img/logo.png?raw=true" alt="SNIC'ELECTRIC"><div><strong>SNIC'ELECTRIC</strong><span>Administración</span></div></div>
+            <nav class="sidebar-nav">
+                <a href="../dashboard.html" class="nav-item" data-permission="inicio.ver"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
+                <a href="clientes.html" class="nav-item" data-permission="clientes.ver"><i class="fa-solid fa-users"></i><span>Clientes</span></a>
+                <a href="inventario.html" class="nav-item" data-permission="inventario.ver"><i class="fa-solid fa-boxes-stacked"></i><span>Inventario</span></a>
+                <a href="cotizaciones.html" class="nav-item" data-permission="cotizaciones.ver"><i class="fa-solid fa-file-signature"></i><span>Cotizaciones</span></a>
+                <a href="facturas.html" class="nav-item active" data-permission="facturas.ver"><i class="fa-solid fa-file-invoice-dollar"></i><span>Facturas</span></a>
+                <a href="ordenes.html" class="nav-item" data-permission="ordenes.ver"><i class="fa-solid fa-clipboard-list"></i><span>Órdenes de servicio</span></a>
+                <a href="inspecciones.html" class="nav-item" data-permission="inspecciones.ver"><i class="fa-solid fa-magnifying-glass-chart"></i><span>Inspecciones</span></a>
+                <a href="informe-obra.html" class="nav-item" data-permission="informe_obra.ver"><i class="fa-solid fa-file-lines"></i><span>Informe de obra</span></a>
+                <a href="informes.html" class="nav-item" data-permission="informes.ver"><i class="fa-solid fa-chart-column"></i><span>Informes</span></a>
+            <div class="nav-divider"></div>
+                <a href="administracion.html" class="nav-item" data-permission="administracion.ver"><i class="fa-solid fa-user-shield"></i><span>Administración</span></a>
+                <a href="configuracion.html" class="nav-item" data-permission="configuracion.ver"><i class="fa-solid fa-gear"></i><span>Configuración</span></a>
+            </nav>
+        <div class="sidebar-bottom"><button type="button" class="logout-button" data-logout><i class="fa-solid fa-right-from-bracket"></i><span>Cerrar sesión</span></button></div>
+    </aside>
+
+    <!-- =================================================
+            CONTENIDO PRINCIPAL
+    ================================================== -->
+
+    <main class="main-content">
+
+        <!-- =================================================
+         TOPBAR
+        ================================================== -->
+
+        <header class="topbar">
+            <button type="button" class="menu-toggle" data-menu-toggle aria-label="Abrir menú"><i class="fa-solid fa-bars"></i></button>
+            <div class="topbar-title"><span>Gestión administrativa</span><h1>Facturas</h1></div>
+            <div class="topbar-user">
+                <div class="topbar-user-info"><strong data-user-name>Usuario</strong><span data-user-role>-</span></div>
+                <div class="user-avatar" id="topbarAvatar" aria-label="Avatar del usuario">US</div>
+            </div>
+        </header>
+            
+        <!-- =================================================
+             CONTENIDO
+        ================================================== -->
+
+        <section class="page-content">
+
+            <!-- ENCABEZADO -->
+
+            <div class="page-heading">
+                <div><span class="eyebrow">GESTIÓN COMERCIAL</span><h2>Facturas</h2>
+                    <p>Genera facturas comerciales a partir de los trabajos realizados y sus valores aprobados.</p>
+                </div>
+                <div class="heading-actions">
+                    <button type="button" class="btn-primary" id="btnNuevaFactura" data-permission="facturas.crear"
+                    >
+                        <i class="fa-solid fa-plus"></i> 
+                        Nueva factura
+                    </button>
+                </div>
+            </div>
+            <div class="stats">
+                <div class="stat-card"><div class="stat-icon blue"><i class="fa-solid fa-file-invoice"></i></div><div><small>Total facturas</small><strong id="statTotal">0</strong></div>
+                </div>
+                <div class="stat-card"><div class="stat-icon yellow"><i class="fa-solid fa-hourglass-half"></i></div><div><small>Pendientes</small><strong id="statPendientes">0</strong></div>
+                </div>
+                <div class="stat-card"><div class="stat-icon green"><i class="fa-solid fa-circle-check"></i></div><div><small>Pagadas</small><strong id="statPagadas">0</strong></div>
+                </div>
+                <div class="stat-card"><div class="stat-icon orange"><i class="fa-solid fa-dollar-sign"></i></div><div><small>Valor facturado</small><strong id="statValor">$ 0</strong></div>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="toolbar">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="search" id="buscarFactura" placeholder="Buscar por número, cliente o documento..." autocomplete="off">
+                    </div>
+                    <div class="toolbar-actions">
+                        <select id="filtroEstado" class="filter-select">
+                            <option value="">Todos los estados</option>
+                            <option value="borrador">Borrador</option>
+                            <option value="emitida">Emitida</option>
+                            <option value="pagada">Pagada</option>
+                            <option value="anulada">Anulada</option>
+                        </select>
+                        <select id="filtroFecha" class="filter-select">
+                            <option value="">Todas las fechas</option>
+                            <option value="mes">Este mes</option>
+                            <option value="trimestre">Este trimestre</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table class="facturas-table">
+                        <thead>
+                            <tr>
+                                <th>FACTURA</th>
+                                <th>CLIENTE</th>
+                                <th>FECHA</th>
+                                <th>ORDEN</th>
+                                <th>VALOR</th>
+                                <th>ESTADO</th>
+                                <th>ACCIONES</th>
+                            </tr>
+                        </thead>
+                        <tbody id="facturasTableBody"></tbody>
+                    </table>
+                    <div id="facturasEmpty" class="empty-state" hidden>
+                        <div class="empty-icon">
+                            <i class="fa-solid fa-file-signature"></i>
+                        </div>
+                        <h3>No hay facturas registradas</h3>
+                        <p>Crea la primera factura para comenzar una propuesta comercial.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    </div>
+    <div class="modal-overlay" id="facturaModal" aria-hidden="true">
+    <div class="modal modal-quote" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+        <div class="modal-header">
+            <div><span class="modal-eyebrow">FACTURA COMERCIAL</span>
+                <h2 id="modalTitulo">Nueva Factura</h2>
+            </div>
+            <button type="button" class="modal-close" id="btnCerrarModal" aria-label="Cerrar">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <form id="facturaForm">
+            <input type="hidden" id="facturaId">
+        <div class="form-section">
+            <div class="form-section-title">
+                <i class="fa-solid fa-user"></i>
+                <span>Cliente y referencia</span>
+            </div>
+            <div class="form-grid">
+                <div class="form-group">
+                        <label>Cotización base (Carga ítems)
+                            <select id="cotizacionFactura">
+                                <option value="">Seleccionar cotización...</option>
+                            </select>
+                        </label>
+                        <label>Orden de servicio (Referencia)
+                            <select id="ordenFactura">
+                                <option value="">Seleccionar orden...</option>
+                            </select>
+                        </label>
+                        <label>Inspección (Referencia)
+                            <select id="inspeccionFactura">
+                                <option value="">Seleccionar inspección...</option>
+                            </select>
+                        </label>
+                        <label>Informe de obra (Referencia)
+                            <select id="informeFactura">
+                                <option value="">Seleccionar informe...</option>
+                            </select>
+                        </label>
+                        <label>Estado
+                            <select id="estadoFactura">
+                                <option value="borrador">Borrador</option>
+                                <option value="emitida">Emitida</option>
+                                <option value="pagada">Pagada</option>
+                                <option value="anulada">Anulada</option>
+                            </select>
+                        </label>
+                    </div>
+                <div class="form-group">
+                    <label>Cliente
+                        <select id="clienteFactura" required>
+                            <option value="">Seleccionar cliente...</option>
+                        </select>
+                    </label>
+                    <label for="fechaFactura">Fecha de emisión<span>*</span></label>
+                    <input type="date" id="fechaFactura" required>
+                    <label for="vencimientoFactura">Fecha de vencimiento (días)</label>
+                    <input type="number" id="vencimientoFactura" min="1" value="30">
+                </div>
+                <div class="form-group">
+                     <label>Forma de pago
+                        <select id="formaPago">
+                            <option>Transferencia bancaria</option>
+                            <option>Pago en efectivo</option>
+                            <option>Tarjeta</option>
+                            <option>Otro</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Referencia de pago
+                        <input id="referenciaPago" placeholder="Opcional">
+                    </label>
+                </div>
+                
+                <div class="form-group full">
+                    <label for="observacionesFactura">Observaciones / condiciones comerciales</label>
+                    <textarea id="observacionesFactura" rows="3" placeholder="Condiciones, tiempos, forma de pago, alcance..." ></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="form-section">
+            <div class="form-section-title">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>Conceptos de la factura</span>
+            </div>
+            <div class="items-toolbar">
+                <div class="product-picker">
+                    <select id="productoSelector">
+                        <option value="">Agregar producto o servicio del inventario...</option>
+                    </select>
+                </div><button type="button" class="btn-secondary" id="btnAgregarProducto"><i class="fa-solid fa-plus"></i> Agregar</button>
+                    <button type="button" class="btn-outline" id="btnAgregarLibre"><i class="fa-solid fa-pen"></i> Concepto libre</button>
+            </div>
+            <div class="quote-items-wrap">
+                <table class="quote-items-table">
+                    <thead>
+                        <tr><th>DESCRIPCIÓN</th>
+                            <th>UNIDAD</th><th>CANT.</th>
+                            <th>PRECIO UNIT.</th>
+                            <th>DESC.</th>
+                            <th>TOTAL</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="itemsFactura"></tbody>
+                </table>
+                <div class="items-empty" id="itemsEmpty">Aún no hay conceptos. Agrega productos del inventario o un concepto libre.</div>
+            </div>
+        </div>
+        <div class="form-section totals-section">
+            <div class="totals-grid">
+                <div class="totals-notes">
+                    <div class="form-group">
+                        <label for="descuentoFactura">Descuento global (%)</label>
+                        <input type="number" id="descuentoFactura" min="0" max="100" step="0.01" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="ivaFactura">IVA (%)</label>
+                        <input type="number" id="ivaFactura" min="0" max="100" step="0.01" value="19">
+                    </div>
+                </div>
+                <div class="totals-box">
+                    <div>
+                        <span>Subtotal</span>
+                        <strong id="subtotalFactura">$ 0</strong>
+                    </div>
+                    <div>
+                        <span>Descuento</span>
+                        <strong id="descuentoValor">$ 0</strong>
+                    </div>
+                    <div>
+                        <span>Descuento Global</span>
+                        <strong id="descuentoGlobalValor">$ 0</strong>
+                    </div>
+                    <div>
+                        <span>Base gravable</span>
+                        <strong id="baseFactura">$ 0</strong>
+                    </div>
+                    <div>
+                        <span>IVA</span>
+                        <strong id="ivaValor">$ 0</strong>
+                    </div>
+                    <div class="total-final">
+                        <span>TOTAL</span>
+                        <strong id="totalFactura">$ 0</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn-secondary" id="btnCancelar">Cancelar</button>
+            <button type="submit" class="btn-primary">
+                <i class="fa-solid fa-floppy-disk"></i> Guardar factura
+            </button>
+        </div>
+    </form>
+  </div>
+</div>
+    <div class="modal-overlay" id="detalleModal" aria-hidden="true">
+        <div class="modal modal-detail" role="dialog" aria-modal="true">
+            <div class="modal-header">
+                <div><span class="modal-eyebrow">DETALLE</span>
+                    <h2 id="detalleTitulo">Factura</h2>
+                </div><button type="button" class="modal-close" id="btnCerrarDetalle">
+                    <i class="fa-solid fa-xmark"></i></button>
+                 </div><div id="detalleContenido"></div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="estadoModal" aria-hidden="true">
+        <div class="modal modal-small" role="dialog" aria-modal="true">
+            <div class="modal-header">
+                <div><span class="modal-eyebrow">ACTUALIZAR</span>
+                    <h2>Estado de factura</h2>
+                </div><button type="button" class="modal-close" id="btnCerrarEstado">
+                    <i class="fa-solid fa-xmark"></i></button>
+                </div><div class="state-form">
+                    <input type="hidden" id="estadoFacturaId">
+                    <div class="form-group">
+                        <label for="nuevoEstado">Nuevo estado</label>
+                        <select id="nuevoEstado">
+                            <option value="borrador">Borrador</option>
+                            <option value="emitida">Emitida</option>
+                            <option value="pagada">Pagada</option>
+                            <option value="anulada">Anulada</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-secondary" id="btnCancelarEstado">Cancelar</button>
+                        <button type="button" class="btn-primary" id="btnGuardarEstado">Guardar estado</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<div class="toast" id="toast">
+    <i id="toastIcon" class="fa-solid fa-circle-check"></i>
+    <span id="toastMessage"></span>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-client.js"></script>
+    <script src="../js/auth.js?v=35"></script>
+    <script src="../js/facturas.js"></script>
+</body>
+</html>
+
+    

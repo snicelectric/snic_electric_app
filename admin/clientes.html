@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Gestión de clientes - SNIC'ELECTRIC"
+    >
+
+    <title>
+        Clientes | SNIC'ELECTRIC
+    </title>
+
+
+    <!-- Favicon -->
+
+    <link rel="icon" href="https://github.com/Francisco1824/proyectosnicelectric/blob/main/img/logo.png?raw=true" />
+
+
+    <!-- Google Fonts -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- Font Awesome -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+
+    <!-- CSS -->
+
+    <link
+        rel="stylesheet"
+        href="../css/clientes.css"
+    >
+
+    <link 
+        rel="stylesheet" 
+        href="../css/app-v2.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     CONTENEDOR
+====================================================== -->
+
+<div class="clientes-app">
+
+    <!-- =================================================
+        SIDEBAR
+    ================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo"><img src="https://github.com/Francisco1824/proyectosnicelectric/blob/main/img/logo.png?raw=true" alt="SNIC'ELECTRIC"><div><strong>SNIC'ELECTRIC</strong><span>Administración</span></div></div>
+            <nav class="sidebar-nav">
+                <a href="../dashboard.html" class="nav-item" data-permission="inicio.ver"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
+                <a href="clientes.html" class="nav-item active" data-permission="clientes.ver"><i class="fa-solid fa-users"></i><span>Clientes</span></a>
+                <a href="inventario.html" class="nav-item" data-permission="inventario.ver"><i class="fa-solid fa-boxes-stacked"></i><span>Inventario</span></a>
+                <a href="cotizaciones.html" class="nav-item" data-permission="cotizaciones.ver"><i class="fa-solid fa-file-signature"></i><span>Cotizaciones</span></a>
+                <a href="facturas.html" class="nav-item" data-permission="facturas.ver"><i class="fa-solid fa-file-invoice-dollar"></i><span>Facturas</span></a>
+                <a href="ordenes.html" class="nav-item" data-permission="ordenes.ver"><i class="fa-solid fa-clipboard-list"></i><span>Órdenes de servicio</span></a>
+                <a href="inspecciones.html" class="nav-item" data-permission="inspecciones.ver"><i class="fa-solid fa-magnifying-glass-chart"></i><span>Inspecciones</span></a>
+                <a href="informe-obra.html" class="nav-item" data-permission="informe_obra.ver"><i class="fa-solid fa-file-lines"></i><span>Informe de obra</span></a>
+                <a href="informes.html" class="nav-item" data-permission="informes.ver"><i class="fa-solid fa-chart-column"></i><span>Informes</span></a>
+            <div class="nav-divider"></div>
+                <a href="administracion.html" class="nav-item" data-permission="administracion.ver"><i class="fa-solid fa-user-shield"></i><span>Administración</span></a>
+                <a href="configuracion.html" class="nav-item" data-permission="configuracion.ver"><i class="fa-solid fa-gear"></i><span>Configuración</span></a>
+            </nav>
+        <div class="sidebar-bottom"><button type="button" class="logout-button" data-logout><i class="fa-solid fa-right-from-bracket"></i><span>Cerrar sesión</span></button></div>
+    </aside>
+
+    <!-- =================================================
+            CONTENIDO PRINCIPAL
+    ================================================== -->
+
+    <main class="main-content">
+
+        <!-- =================================================
+         TOPBAR
+        ================================================== -->
+
+        <header class="topbar">
+            <button type="button" class="menu-toggle" data-menu-toggle aria-label="Abrir menú"><i class="fa-solid fa-bars"></i></button>
+            <div class="topbar-title"><span>Gestión administrativa</span><h1>Clientes</h1></div>
+            <div class="topbar-user">
+                <div class="topbar-user-info"><strong data-user-name>Usuario</strong><span data-user-role>-</span></div>
+                <div class="user-avatar" id="topbarAvatar" aria-label="Avatar del usuario">US</div>
+            </div>
+        </header>
+
+
+        <!-- =================================================
+             CONTENIDO
+        ================================================== -->
+
+        <section class="page-content">
+
+            <!-- ENCABEZADO -->
+
+            <div class="page-heading">
+                <div><span class="eyebrow">BASE DE CLIENTES</span><h2>Administración de clientes</h2>
+                    <p>Registra y administra los clientes que serán utilizados posteriormente en cotizaciones, órdenes, inspecciones y facturas.</p>
+                </div>
+                <button type="button" class="btn-primary" id="btnNuevoCliente" data-permission="clientes.crear">
+                    <i class="fa-solid fa-plus"></i>
+                    Nuevo cliente
+                </button>
+            </div>
+
+            <!-- ESTADÍSTICAS -->
+
+            <div class="stats-grid">
+                <div class="stat-card"><div class="stat-icon blue"><i class="fa-solid fa-users"></i></div><div><span>Total clientes</span><strong id="totalClientes">0</strong></div></div>
+                <div class="stat-card"><div class="stat-icon green"><i class="fa-solid fa-user-check"></i></div><div><span>Activos</span><strong id="clientesActivos">0</strong></div></div>
+                <div class="stat-card"><div class="stat-icon yellow"><i class="fa-solid fa-building"></i></div><div><span>Empresas</span><strong id="clientesEmpresas">0</strong></div></div>
+                <div class="stat-card"><div class="stat-icon dark"><i class="fa-solid fa-user"></i></div><div><span>Personas</span><strong id="clientesPersonas">0</strong></div></div></div>
+
+            <!-- HERRAMIENTAS -->
+
+            <div class="content-card">
+                <div class="toolbar">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="search" id="buscarCliente" placeholder="Buscar por nombre, documento, teléfono o correo..." autocomplete="off">
+                    </div>
+                    <div class="toolbar-actions">
+                        <select id="filtroTipo" class="filter-select">
+                            <option value="">Todos los tipos</option>
+                            <option value="persona">Persona</option>
+                            <option value="empresa">Empresa</option>
+                        </select>
+                        <select id="filtroEstado" class="filter-select">
+                            <option value="">Todos los estados</option>
+                            <option value="activo">Activos</option>
+                            <option value="inactivo">Inactivos</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- TABLA -->
+
+                <div class="table-wrapper">
+                    <table class="clientes-table">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Documento</th>
+                                <th>Contacto</th>
+                                <th>Tipo</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clientesTableBody">
+                        </tbody>
+                    </table>
+                    <div id="clientesEmpty" class="empty-state">
+                        <div class="empty-icon"><i class="fa-solid fa-users"></i></div>
+                        <h3>No hay clientes registrados</h3>
+                        <p>Crea el primer cliente para comenzar a utilizar el sistema.</p>
+                        <button type="button" class="btn-primary" id="btnCrearPrimerCliente" data-permission="clientes.crear">
+                            <i class="fa-solid fa-plus"></i>
+                            Crear cliente
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+
+
+<!-- =====================================================
+     MODAL CLIENTE
+====================================================== -->
+
+<div
+    class="modal-overlay"
+    id="clienteModal"
+    aria-hidden="true"
+>
+
+
+    <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalClienteTitulo"
+    >
+
+
+        <div class="modal-header">
+
+
+            <div>
+
+                <span class="modal-eyebrow">
+                    REGISTRO DE CLIENTE
+                </span>
+
+                <h2 id="modalClienteTitulo">
+                    Nuevo cliente
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="modal-close"
+                id="btnCerrarModal"
+                aria-label="Cerrar"
+            >
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+
+        </div>
+
+
+
+        <form
+            id="clienteForm"
+            autocomplete="off"
+        >
+
+
+            <input
+                type="hidden"
+                id="clienteId"
+            >
+
+
+            <!-- =================================================
+                 TIPO
+            ================================================== -->
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+
+                    <i class="fa-solid fa-id-card"></i>
+
+                    <span>
+                        Información básica
+                    </span>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label for="tipoCliente">
+                            Tipo de cliente
+                            <span>*</span>
+                        </label>
+
+                        <select
+                            id="tipoCliente"
+                            required
+                        >
+
+                            <option value="">
+                                Seleccionar
+                            </option>
+
+                            <option value="persona">
+                                Persona natural
+                            </option>
+
+                            <option value="empresa">
+                                Empresa
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="documentoTipo">
+                            Tipo de documento
+                            <span>*</span>
+                        </label>
+
+                        <select
+                            id="documentoTipo"
+                            required
+                        >
+
+                            <option value="CC">
+                                Cédula de ciudadanía
+                            </option>
+
+                            <option value="NIT">
+                                NIT
+                            </option>
+
+                            <option value="CE">
+                                Cédula de extranjería
+                            </option>
+
+                            <option value="PASAPORTE">
+                                Pasaporte
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="documentoNumero">
+                            Número de documento
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="documentoNumero"
+                            placeholder="Ej. 123456789"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Nombre (Solo para Persona Natural) -->
+                    <div class="form-group" id="groupNombre">
+
+                        <label for="nombreCliente">
+                            Nombre
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nombreCliente"
+                            placeholder="Ej. Juan Carlos"
+                        >
+
+                    </div>
+
+
+                    <!-- Apellido (Solo para Persona Natural) -->
+                    <div class="form-group" id="groupApellido">
+
+                        <label for="apellidoCliente">
+                            Apellido
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="apellidoCliente"
+                            placeholder="Ej. Pérez Gómez"
+                        >
+
+                    </div>
+
+
+                    <!-- Razón Social (Solo para Empresa) -->
+                    <div class="form-group" id="groupRazonSocial" style="display: none;">
+
+                        <label for="razonSocialCliente">
+                            Razón Social
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="razonSocialCliente"
+                            placeholder="Ej. Soluciones Eléctricas S.A.S."
+                        >
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 CONTACTO
+            ================================================== -->
+
+            <div class="form-section">
+
+
+                <div class="form-section-title">
+
+                    <i class="fa-solid fa-address-book"></i>
+
+                    <span>
+                        Información de contacto
+                    </span>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label for="telefonoCliente">
+                            Teléfono
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="telefonoCliente"
+                            placeholder="+57 300 000 0000"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="correoCliente">
+                            Correo electrónico
+                        </label>
+
+                        <input
+                            type="email"
+                            id="correoCliente"
+                            placeholder="cliente@correo.com"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group form-full">
+
+                        <label for="direccionCliente">
+                            Dirección
+                        </label>
+
+                        <input
+                            type="text"
+                            id="direccionCliente"
+                            placeholder="Dirección del cliente"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="ciudadCliente">
+                            Ciudad
+                        </label>
+
+                        <input
+                            type="text"
+                            id="ciudadCliente"
+                            value="Cúcuta"
+                            placeholder="Ciudad"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="departamentoCliente">
+                            Departamento
+                        </label>
+
+                        <input
+                            type="text"
+                            id="departamentoCliente"
+                            value="Norte de Santander"
+                            placeholder="Departamento"
+                        >
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 INFORMACIÓN ADICIONAL
+            ================================================== -->
+
+            <div class="form-section">
+
+
+                <div class="form-section-title">
+
+                    <i class="fa-solid fa-file-lines"></i>
+
+                    <span>
+                        Información adicional
+                    </span>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label for="estadoCliente">
+                            Estado
+                        </label>
+
+                        <select
+                            id="estadoCliente"
+                        >
+
+                            <option value="activo">
+                                Activo
+                            </option>
+
+                            <option value="inactivo">
+                                Inactivo
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group form-full">
+
+                        <label for="observacionesCliente">
+                            Observaciones
+                        </label>
+
+                        <textarea
+                            id="observacionesCliente"
+                            rows="4"
+                            placeholder="Información adicional del cliente..."
+                        ></textarea>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 BOTONES
+            ================================================== -->
+
+            <div class="modal-footer">
+
+
+                <button
+                    type="button"
+                    class="btn-secondary"
+                    id="btnCancelarCliente"
+                >
+
+                    Cancelar
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="btn-primary"
+                    data-permission="clientes.crear"
+                    id="btnGuardarCliente"
+                >
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+
+                    Guardar cliente
+
+                </button>
+
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     MODAL DETALLE
+====================================================== -->
+
+<div
+    class="modal-overlay"
+    id="detalleModal"
+    aria-hidden="true"
+>
+
+
+    <div class="modal modal-detail">
+
+
+        <div class="modal-header">
+
+
+            <div>
+
+                <span class="modal-eyebrow">
+                    INFORMACIÓN DEL CLIENTE
+                </span>
+
+                <h2>
+                    Detalle del cliente
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="modal-close"
+                id="btnCerrarDetalle"
+            >
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+
+        </div>
+
+
+        <div
+            class="cliente-detail-content"
+            id="clienteDetailContent"
+        ></div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     TOAST
+====================================================== -->
+
+<div
+    class="toast"
+    id="toast"
+    role="status"
+    aria-live="polite"
+>
+
+    <i id="toastIcon"></i>
+
+    <span id="toastMessage"></span>
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+     
+     IMPORTANTE:
+     auth.js SIEMPRE ANTES de clientes.js
+====================================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-client.js"></script>
+    <script src="../js/auth.js?v=35"></script>
+
+<script src="../js/clientes.js"></script>
+</body>
+
+</html>

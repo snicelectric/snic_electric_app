@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Inspecciones de obra - SNIC'ELECTRIC">
+<title>Inspecciones | SNIC'ELECTRIC</title>
+<link rel="icon" href="https://github.com/Francisco1824/proyectosnicelectric/blob/main/img/logo.png?raw=true" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="../css/inspecciones.css">
+<link rel="stylesheet" href="../css/app-v2.css">
+
+</head>
+<body>
+<div class="inspecciones-app">
+        <!-- =================================================
+            SIDEBAR
+        ================================================== -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo"><img src="https://github.com/Francisco1824/proyectosnicelectric/blob/main/img/logo.png?raw=true" alt="SNIC'ELECTRIC"><div><strong>SNIC'ELECTRIC</strong><span>Administración</span></div></div>
+            <nav class="sidebar-nav">
+                <a href="../dashboard.html" class="nav-item" data-permission="inicio.ver"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
+                <a href="clientes.html" class="nav-item" data-permission="clientes.ver"><i class="fa-solid fa-users"></i><span>Clientes</span></a>
+                <a href="inventario.html" class="nav-item" data-permission="inventario.ver"><i class="fa-solid fa-boxes-stacked"></i><span>Inventario</span></a>
+                <a href="cotizaciones.html" class="nav-item" data-permission="cotizaciones.ver"><i class="fa-solid fa-file-signature"></i><span>Cotizaciones</span></a>
+                <a href="facturas.html" class="nav-item" data-permission="facturas.ver"><i class="fa-solid fa-file-invoice-dollar"></i><span>Facturas</span></a>
+                <a href="ordenes.html" class="nav-item" data-permission="ordenes.ver"><i class="fa-solid fa-clipboard-list"></i><span>Órdenes de servicio</span></a>
+                <a href="inspecciones.html" class="nav-item active" data-permission="inspecciones.ver"><i class="fa-solid fa-magnifying-glass-chart"></i><span>Inspecciones</span></a>
+                <a href="informe-obra.html" class="nav-item" data-permission="informe_obra.ver"><i class="fa-solid fa-file-lines"></i><span>Informe de obra</span></a>
+                <a href="informes.html" class="nav-item" data-permission="informes.ver"><i class="fa-solid fa-chart-column"></i><span>Informes</span></a>
+            <div class="nav-divider"></div>
+                <a href="administracion.html" class="nav-item" data-permission="administracion.ver"><i class="fa-solid fa-user-shield"></i><span>Administración</span></a>
+                <a href="configuracion.html" class="nav-item" data-permission="configuracion.ver"><i class="fa-solid fa-gear"></i><span>Configuración</span></a>
+            </nav>
+        <div class="sidebar-bottom"><button type="button" class="logout-button" data-logout><i class="fa-solid fa-right-from-bracket"></i><span>Cerrar sesión</span></button></div>
+    </aside>
+
+    <main class="main-content">
+        
+        <!-- =================================================
+         TOPBAR
+        ================================================== -->
+
+        <header class="topbar">
+            <button type="button" class="menu-toggle" data-menu-toggle aria-label="Abrir menú"><i class="fa-solid fa-bars"></i></button>
+            <div class="topbar-title"><span>Gestión administrativa</span><h1>Inspecciones</h1></div>
+            <div class="topbar-user">
+                <div class="topbar-user-info"><strong data-user-name>Usuario</strong><span data-user-role>-</span></div>
+                <div class="user-avatar" id="topbarAvatar" aria-label="Avatar del usuario">US</div>
+            </div>
+        </header>
+
+        <section class="page-content">
+            <div class="page-heading">
+                <div>
+                    <span class="eyebrow">DIAGNÓSTICO DE OBRA</span>
+                    <h2>Administración de inspecciones</h2>
+                    <p>Registra el estado de la obra, hallazgos, necesidades y evidencias que servirán como base para la cotización.</p>
+                </div>
+                <div class="heading-actions">
+                    <button type="button" class="btn-primary" id="btnNuevaInspeccion" data-permission="inspecciones.crear"><i class="fa-solid fa-plus"></i> Nueva inspección</button>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card"><div class="stat-icon blue"><i class="fa-solid fa-clipboard-check"></i></div><div><span>Total inspecciones</span><strong id="totalInspecciones">0</strong></div></div>
+                <div class="stat-card"><div class="stat-icon green"><i class="fa-solid fa-circle-check"></i></div><div><span>Completadas</span><strong id="inspeccionesCompletadas">0</strong></div></div>
+                <div class="stat-card"><div class="stat-icon yellow"><i class="fa-solid fa-triangle-exclamation"></i></div><div><span>Requieren intervención</span><strong id="inspeccionesIntervencion">0</strong></div></div>
+                <div class="stat-card"><div class="stat-icon dark"><i class="fa-solid fa-hourglass-half"></i></div><div><span>Pendientes</span><strong id="inspeccionesPendientes">0</strong></div></div>
+            </div>
+
+            <div class="content-card">
+                <div class="toolbar">
+                    <div class="search-box"><i class="fa-solid fa-magnifying-glass"></i><input type="search" id="buscarInspeccion" placeholder="Buscar por cliente, código, dirección o técnico..." autocomplete="off"></div>
+                    <div class="toolbar-actions">
+                        <select id="filtroEstado" class="filter-select"><option value="">Todos los estados</option><option value="pendiente">Pendientes</option><option value="en_proceso">En proceso</option><option value="completada">Completadas</option></select>
+                        <select id="filtroResultado" class="filter-select"><option value="">Todos los resultados</option><option value="favorable">Sin novedades críticas</option><option value="intervencion">Requiere intervención</option><option value="riesgo">Riesgo / atención prioritaria</option></select>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table class="inspecciones-table">
+                        <thead><tr><th>INSPECCIÓN</th><th>CLIENTE</th><th>FECHA</th><th>TÉCNICO</th><th>RESULTADO</th><th>ESTADO</th><th>ACCIONES</th></tr></thead>
+                        <tbody id="inspeccionesTableBody"></tbody>
+                    </table>
+                    <div id="inspeccionesEmpty" class="empty-state" hidden>
+                        <div class="empty-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                        <h3>No hay inspecciones registradas</h3>
+                        <p>Selecciona un cliente y registra la primera inspección de obra.</p>
+                        <button type="button" class="btn-primary" id="btnCrearPrimeraInspeccion" data-permission="inspecciones.crear"><i class="fa-solid fa-plus"></i> Crear inspección</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<!-- MODAL INSPECCIÓN -->
+<div class="modal-overlay" id="inspeccionModal" aria-hidden="true">
+    <div class="modal modal-inspection" role="dialog" aria-modal="true" aria-labelledby="modalInspeccionTitulo">
+        <div class="modal-header">
+            <div><span class="modal-eyebrow">REGISTRO DE INSPECCIÓN</span><h2 id="modalInspeccionTitulo">Nueva inspección</h2></div>
+            <button type="button" class="modal-close" id="btnCerrarInspeccion" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <form id="inspeccionForm" autocomplete="off">
+            <input type="hidden" id="inspeccionId">
+            <div class="form-section">
+                <div class="form-section-title"><i class="fa-solid fa-user"></i><span>Cliente y visita</span></div>
+                <div class="form-grid">
+                    <div class="form-group"><label for="clienteInspeccion">Cliente <span>*</span></label><select id="clienteInspeccion" required></select><small>La inspección solo puede asociarse a un cliente registrado.</small></div>
+                    <div class="form-group"><label for="fechaInspeccion">Fecha <span>*</span></label><input type="date" id="fechaInspeccion" required></div>
+                    <div class="form-group"><label for="tecnicoInspeccion">Técnico / responsable</label><input type="text" id="tecnicoInspeccion" readonly></div>
+                    <div class="form-group"><label for="tipoInspeccion">Tipo de inspección <span>*</span></label><select id="tipoInspeccion" required><option value="inicial">Inspección inicial</option><option value="mantenimiento">Mantenimiento</option><option value="diagnostico">Diagnóstico de falla</option><option value="seguimiento">Seguimiento</option></select></div>
+                    <div class="form-group"><label for="direccionInspeccion">Dirección de la obra <span>*</span></label><input type="text" id="direccionInspeccion" required placeholder="Dirección del lugar inspeccionado"></div>
+                    <div class="form-group"><label for="ciudadInspeccion">Ciudad / municipio</label><input type="text" id="ciudadInspeccion" placeholder="Ciudad o municipio"></div>
+                    <div class="form-group"><label for="contactoObra">Contacto en obra</label><input type="text" id="contactoObra" placeholder="Nombre y teléfono"></div>
+                    <div class="form-group"><label for="estadoInspeccion">Estado</label><select id="estadoInspeccion"><option value="pendiente">Pendiente</option><option value="en_proceso">En proceso</option><option value="completada">Completada</option></select></div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="form-section-title"><i class="fa-solid fa-list-check"></i><span>Estado de la instalación</span></div>
+                <p class="section-help">Evalúa cada punto encontrado durante la visita. Puedes agregar observaciones específicas.</p>
+                <div class="inspection-checklist" id="inspectionChecklist"></div>
+            </div>
+
+            <div class="form-section">
+                <div class="form-section-title"><i class="fa-solid fa-screwdriver-wrench"></i><span>Hallazgos y necesidades</span></div>
+                <div class="form-grid">
+                    <div class="form-group form-full"><label for="hallazgosInspeccion">Hallazgos</label><textarea id="hallazgosInspeccion" rows="4" placeholder="Describe el estado encontrado, fallas, deterioros o situaciones relevantes..."></textarea></div>
+                    <div class="form-group form-full"><label for="recomendacionesInspeccion">Recomendaciones técnicas</label><textarea id="recomendacionesInspeccion" rows="4" placeholder="Indica las acciones recomendadas para corregir o mejorar la instalación..."></textarea></div>
+                    <div class="form-group"><label for="resultadoInspeccion">Resultado <span>*</span></label><select id="resultadoInspeccion" name="resultadoInspeccion">
+                        <option value="">Selecciona un resultado</option>
+                        <option value="sin_novedades">Sin novedades</option>
+                        <option value="requiere_intervencion">Requiere intervención</option>
+                        <option value="no_conforme">No conforme</option>
+                        <option value="pendiente">Pendiente</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label for="prioridadInspeccion">Prioridad</label><select id="prioridadInspeccion" name="prioridadInspeccion">
+                        <option value="">Selecciona prioridad</option>
+                        <option value="baja">Baja</option>
+                        <option value="normal">Normal</option>
+                        <option value="media">Media</option>
+                        <option value="alta">Alta</option>
+                        <option value="urgente">Urgente</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="requirements-box">
+                    <div class="requirements-head"><div><strong>Necesidades detectadas</strong><span>Estas líneas podrán utilizarse posteriormente para preparar la cotización.</span></div><button type="button" class="btn-secondary btn-small" id="btnAgregarNecesidad"><i class="fa-solid fa-plus"></i> Agregar</button></div>
+                    <div id="necesidadesContainer"></div>
+                    <div id="necesidadesEmpty" class="mini-empty">No hay necesidades agregadas.</div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="form-section-title"><i class="fa-solid fa-camera"></i><span>Evidencia fotográfica</span></div>
+                <p class="section-help">Agrega fotografías del estado de la obra. En esta etapa se guardan localmente; posteriormente las conectaremos con Supabase Storage.</p>
+                <label class="photo-upload" for="fotosInspeccion"><i class="fa-solid fa-cloud-arrow-up"></i><span><strong>Seleccionar fotografías</strong><small>JPG, PNG o WEBP · máximo 6 fotografías</small></span></label>
+                <input type="file" id="fotosInspeccion" accept="image/jpeg,image/png,image/webp" multiple hidden>
+                <div class="photo-grid" id="photoPreview"></div>
+            </div>
+
+            <div class="modal-footer"><button type="button" class="btn-secondary" id="btnCancelarInspeccion">Cancelar</button><button type="submit" class="btn-primary" data-permission="inspecciones.crear" id="btnGuardarInspeccion"><i class="fa-solid fa-floppy-disk"></i> Guardar inspección</button></div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL DETALLE -->
+<div class="modal-overlay" id="detalleInspeccionModal" aria-hidden="true">
+    <div class="modal modal-detail modal-inspection-detail" role="dialog" aria-modal="true" aria-labelledby="detalleInspeccionTitulo">
+        <div class="modal-header"><div><span class="modal-eyebrow">INFORMACIÓN DE LA INSPECCIÓN</span><h2 id="detalleInspeccionTitulo">Detalle</h2></div><button type="button" class="modal-close" id="btnCerrarDetalle" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button></div>
+        <div id="detalleInspeccionContenido"></div>
+    </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><i id="toastIcon"></i><span id="toastMessage"></span></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script> 
+<script src="../js/supabase-client.js"></script> 
+<script src="../js/auth.js?v=36">
+</script> <script src="../js/inspecciones.js?v=1"></script>
+</body>
+</html>

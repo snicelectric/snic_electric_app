@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración | SNIC'ELECTRIC</title>
+
+    <!-- FUENTE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- ICONOS -->
+    <link rel="icon" href="https://github.com/Francisco1824/proyectosnicelectric/blob/main/img/logo.png?raw=true" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/app-v2.css">
+    <link rel="stylesheet" href="../css/administracion.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+    <!-- =================================================
+        SIDEBAR
+    ================================================== -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <img src="https://github.com/Francisco1824/proyectosnicelectric/blob/main/img/logo.png?raw=true" alt="SNIC'ELECTRIC">
+            <div><strong>SNIC'ELECTRIC</strong><span>Administración</span></div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="../dashboard.html" class="nav-item" data-permission="inicio.ver"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
+            <a href="clientes.html" class="nav-item" data-permission="clientes.ver"><i class="fa-solid fa-users"></i><span>Clientes</span></a>
+            <a href="inventario.html" class="nav-item" data-permission="inventario.ver"><i class="fa-solid fa-boxes-stacked"></i><span>Inventario</span></a>
+            <a href="cotizaciones.html" class="nav-item" data-permission="cotizaciones.ver"><i class="fa-solid fa-file-signature"></i><span>Cotizaciones</span></a>
+            <a href="facturas.html" class="nav-item" data-permission="facturas.ver"><i class="fa-solid fa-file-invoice-dollar"></i><span>Facturas</span></a>
+            <a href="ordenes.html" class="nav-item" data-permission="ordenes.ver"><i class="fa-solid fa-clipboard-list"></i><span>Órdenes de servicio</span></a>
+            <a href="inspecciones.html" class="nav-item" data-permission="inspecciones.ver"><i class="fa-solid fa-magnifying-glass-chart"></i><span>Inspecciones</span></a>
+            <a href="informe-obra.html" class="nav-item" data-permission="informe_obra.ver"><i class="fa-solid fa-file-lines"></i><span>Informe de obra</span></a>
+            <a href="informes.html" class="nav-item" data-permission="informes.ver"><i class="fa-solid fa-chart-column"></i><span>Informes</span></a>
+            <div class="nav-divider"></div>
+            <a href="administracion.html" class="nav-item active" data-permission="administracion.ver"><i class="fa-solid fa-user-shield"></i><span>Administración</span></a>
+            <a href="configuracion.html" class="nav-item" data-permission="configuracion.ver"><i class="fa-solid fa-gear"></i><span>Configuración</span></a>
+        </nav>
+        <div class="sidebar-bottom">
+            <button type="button" class="logout-button" data-logout><i class="fa-solid fa-right-from-bracket"></i><span>Cerrar sesión</span></button>
+        </div>
+    </aside>
+
+    <!-- =====================================================
+         CONTENIDO PRINCIPAL
+    ===================================================== -->
+    <main class="main-content">
+        <!-- TOPBAR -->
+        <header class="topbar">
+            <button type="button" class="menu-toggle" data-menu-toggle aria-label="Abrir menú"><i class="fa-solid fa-bars"></i></button>
+            <div class="topbar-title"><span>Gestión administrativa</span><h1>Administración</h1></div>
+            <div class="topbar-user">
+                <div class="topbar-user-info"><strong data-user-name>Usuario</strong><span data-user-role>-</span></div>
+                <div class="user-avatar" id="topbarAvatar" aria-label="Avatar del usuario">US</div>
+            </div>
+        </header>
+
+        <!-- SECCIÓN DE CONTENIDO -->
+        <section class="content-container">
+            <div class="content-header">
+                <div>
+                    <span class="eyebrow">GESTIÓN ADMINISTRATIVA</span>
+                    <h2>Usuarios y roles</h2>
+                    <p>Administra los usuarios y permisos del sistema SNIC'ELECTRIC.</p>
+                </div>
+                <button type="button" class="btn-primary" id="btnNuevoUsuario" data-permission="usuarios.crear">
+                    <i class="fa-solid fa-user-plus"></i> Nuevo usuario
+                </button>
+            </div>
+
+            <!-- TARJETAS ESTADÍSTICAS -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+                    <div class="stat-info"><span>Total usuarios</span><strong id="totalUsuarios">0</strong></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-user-shield"></i></div>
+                    <div class="stat-info"><span>Administradores</span><strong id="totalAdministradores">0</strong></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-user-tie"></i></div>
+                    <div class="stat-info"><span>Administrativos</span><strong id="totalAdministrativos">0</strong></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-helmet-safety"></i></div>
+                    <div class="stat-info"><span>Técnicos</span><strong id="totalTecnicos">0</strong></div>
+                </div>
+            </div>
+
+            <!-- PANEL USUARIOS -->
+            <div class="panel usuarios-panel">
+                <div class="panel-header">
+                    <div>
+                        <h3><i class="fa-solid fa-users-gear"></i> Usuarios registrados</h3>
+                        <p>Gestiona los usuarios autorizados para ingresar al sistema.</p>
+                    </div>
+                </div>
+
+                <div class="usuarios-toolbar">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="search" id="buscarUsuario" placeholder="Buscar por nombre o correo..." autocomplete="off">
+                    </div>
+                    <div class="filter-box">
+                        <select id="filtroRol">
+                            <option value="todos">Todos los roles</option>
+                            <option value="administrador">Administrador</option>
+                            <option value="administrativo">Administrativo</option>
+                            <option value="tecnico">Técnico</option>
+                        </select>
+                    </div>
+                    <div class="filter-box">
+                        <select id="filtroEstado">
+                            <option value="todos">Todos los estados</option>
+                            <option value="activo">Activos</option>
+                            <option value="inactivo">Inactivos</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="usuarios-table">
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Correo</th>
+                                <th>Rol</th>
+                                <th>Estado</th>
+                                <th>Último acceso</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usuariosTableBody"></tbody>
+                    </table>
+                </div>
+
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-icon"><i class="fa-solid fa-users"></i></div>
+                    <h3>No hay usuarios</h3>
+                    <p>No existen usuarios que coincidan con los filtros seleccionados.</p>
+                    <button type="button" class="btn-primary" id="btnNuevoUsuarioEmpty" data-permission="usuarios.crear">
+                        <i class="fa-solid fa-user-plus"></i> Crear usuario
+                    </button>
+                </div>
+            </div>
+
+            <!-- ROLES Y PERMISOS -->
+            <div class="panel roles-panel" id="rolesPermisosPanel">
+                <div class="panel-header">
+                    <div>
+                        <h3><i class="fa-solid fa-user-lock"></i> Permisos por rol</h3>
+                        <p>Define qué módulos y acciones puede utilizar cada rol.</p>
+                    </div>
+                </div>
+                <div class="roles-toolbar">
+                    <label for="rolPermisosSelect">Rol</label>
+                    <select id="rolPermisosSelect">
+                        <option value="administrador">Administrador</option>
+                        <option value="administrativo">Administrativo</option>
+                        <option value="tecnico">Técnico</option>
+                    </select>
+                    <span class="roles-help">Los cambios se aplican a los usuarios de ese rol en su próximo ingreso.</span>
+                </div>
+                <div id="permisosRolContainer" class="permisos-rol-container"></div>
+                <div class="roles-actions">
+                    <button type="button" class="btn-primary" id="guardarPermisosRol" data-permission="usuarios.editar">
+                        <i class="fa-solid fa-floppy-disk"></i> Guardar permisos del rol
+                    </button>
+                </div>
+            </div>
+
+            <!-- SEGURIDAD -->
+            <div class="security-info">
+                <div class="security-info-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <div>
+                    <strong>Control de acceso</strong>
+                    <p>Solo el Administrador puede crear, editar, eliminar usuarios y modificar sus roles. Los cambios de permisos se aplican al siguiente ingreso.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<!-- =====================================================
+     MODAL USUARIO
+===================================================== -->
+<div class="modal-overlay" id="usuarioModal" aria-hidden="true">
+    <div class="modal-container">
+        <div class="modal-header">
+            <div>
+                <div class="modal-icon"><i class="fa-solid fa-user-plus"></i></div>
+                <div>
+                    <h2 id="modalTitle">Nuevo usuario</h2>
+                    <p>Registra un usuario del sistema. La cuenta de acceso se crea en Supabase y recibe una invitación por correo.</p>
+                </div>
+            </div>
+            <button type="button" class="modal-close" id="closeUsuarioModal"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <form id="usuarioForm" enctype="multipart/form-data">
+            <input type="hidden" id="usuarioId">
+
+            <div class="form-section">
+                <div class="form-section-title"><i class="fa-solid fa-id-badge"></i> Datos de Carnetización y Fotografía</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="fotoPerfil">Fotografía del Usuario</label>
+                        <input type="file" id="fotoPerfil" accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label for="documentoUsuario">Número de Documento <span>*</span></label>
+                        <input type="text" id="documentoUsuario" placeholder="Ej. 1098765432" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cargoUsuario">Cargo / Especialidad</label>
+                        <input type="text" id="cargoUsuario" placeholder="Ej. Técnico Electricista Senior">
+                    </div>
+                    <div class="form-group">
+                        <label for="tipoSangreUsuario">Tipo de Sangre (RH)</label>
+                        <select id="tipoSangreUsuario">
+                            <option value="">Seleccionar</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactoEmergencia">Contacto de Emergencia</label>
+                        <input type="text" id="contactoEmergencia" placeholder="Nombre y Teléfono">
+                    </div>
+                    <div class="form-group">
+                        <label for="fechaVencimientoCarnet">Vencimiento del Carnet</label>
+                        <input type="date" id="fechaVencimientoCarnet">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="form-section-title"><i class="fa-solid fa-id-card"></i> Datos Personales y Rol</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="nombreUsuario">Nombre <span>*</span></label>
+                        <input type="text" id="nombreUsuario" placeholder="Nombres" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="apellidoUsuario">Apellido <span>*</span></label>
+                        <input type="text" id="apellidoUsuario" placeholder="Apellidos" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="correoUsuario">Correo electrónico <span>*</span></label>
+                        <input type="email" id="correoUsuario" placeholder="usuario@correo.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefonoUsuario">Teléfono</label>
+                        <input type="tel" id="telefonoUsuario" placeholder="300 000 0000">
+                    </div>
+                    <div class="form-group">
+                        <label for="rolUsuario">Rol <span>*</span></label>
+                        <select id="rolUsuario" required>
+                            <option value="">Seleccionar rol</option>
+                            <option value="administrador">Administrador</option>
+                            <option value="administrativo">Administrativo</option>
+                            <option value="tecnico">Técnico</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="estadoUsuario">Estado</label>
+                        <select id="estadoUsuario">
+                            <option value="activo">Activo</option>
+                            <option value="inactivo">Inactivo</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="form-section-title"><i class="fa-solid fa-lock"></i> Seguridad y Acceso</div>
+                <div class="form-grid">
+                    <div class="form-group" style="grid-column: 1 / -1;">
+                        <label>Recuperación de contraseña</label>
+                        <button type="button" id="btnEnviarResetPassword" class="btn-secondary" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px;">
+                            <i class="fa-solid fa-envelope"></i> Enviar correo para cambiar contraseña
+                        </button>
+                        <small style="color: #666; margin-top: 5px; display: block;">El usuario puede recibir un enlace por correo para establecer o recuperar su contraseña. La contraseña nunca se almacena en esta aplicación.</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" id="cancelarUsuario">Cancelar</button>
+                <button type="submit" class="btn-primary" id="guardarUsuario">
+                    <i class="fa-solid fa-floppy-disk"></i> Guardar usuario
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- =====================================================
+     MODAL CARNET CORPORATIVO
+===================================================== -->
+<div class="modal-overlay" id="carnetModal" aria-hidden="true">
+    <div class="modal-container" style="max-width: 440px;">
+        <div class="modal-header">
+            <div>
+                <div class="modal-icon"><i class="fa-solid fa-id-card"></i></div>
+                <div>
+                    <h2>Carnet de Identificación</h2>
+                    <p>Vista previa e impresión corporativa</p>
+                </div>
+            </div>
+            <button type="button" class="modal-close" id="closeCarnetModal"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="form-section" style="background:#f4f7fa;">
+            <div id="carnetPreviewContainer"></div>
+        </div>
+        <div class="modal-footer" style="justify-content: space-between;">
+            <button type="button" class="btn-secondary" id="cancelarCarnetModal">Cerrar</button>
+            <button type="button" id="btnImprimirCarnet" class="btn-primary">
+                <i class="fa-solid fa-print"></i> Imprimir Carnet
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- =====================================================
+     CAMBIAR CONTRASEÑA
+===================================================== -->
+<div class="modal" id="cambiarPasswordModal" aria-hidden="true">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2><i class="fa-solid fa-key"></i> Establecer nueva contraseña</h2>
+      <button type="button" class="close-modal" id="closeCambiarPasswordModal">&times;</button>
+    </div>
+    <form id="formNuevaPassword">
+      <div class="modal-body">
+        <p style="margin-bottom: 15px; color: #666; font-size: 0.9rem;">
+          Ingresa tu nueva contraseña para actualizar tu cuenta.
+        </p>
+        <div class="form-group">
+          <label for="nuevaPasswordInput">Nueva Contraseña</label>
+          <input type="password" id="nuevaPasswordInput" required minlength="8" placeholder="Mínimo 8 caracteres">
+        </div>
+        <div class="form-group">
+          <label for="confirmarPasswordInput">Confirmar Nueva Contraseña</label>
+          <input type="password" id="confirmarPasswordInput" required minlength="8" placeholder="Repite la contraseña">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" id="cancelarCambiarPassword">Cancelar</button>
+        <button type="submit" class="btn-primary" id="btnGuardarNuevaPassword">
+          <i class="fa-solid fa-floppy-disk"></i> Actualizar Contraseña
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- =====================================================
+     MODAL ELIMINAR
+===================================================== -->
+<div class="modal-overlay" id="deleteUsuarioModal" aria-hidden="true">
+    <div class="confirm-modal">
+        <div class="confirm-icon"><i class="fa-solid fa-trash"></i></div>
+        <h2>Eliminar usuario</h2>
+        <p id="deleteUsuarioText">¿Estás seguro de que deseas eliminar este usuario?</p>
+        <p class="confirm-warning">Esta acción no se puede deshacer.</p>
+        <div class="confirm-actions">
+            <button type="button" class="btn-secondary" id="cancelDeleteUsuario">Cancelar</button>
+            <button type="button" class="btn-danger" id="confirmDeleteUsuario">
+                <i class="fa-solid fa-trash"></i> Eliminar
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- =====================================================
+     NOTIFICACIÓN
+===================================================== -->
+<div class="notification" id="notification">
+    <div class="notification-icon"><i class="fa-solid fa-check"></i></div>
+    <div class="notification-content">
+        <strong id="notificationTitle">Operación realizada</strong>
+        <span id="notificationMessage">Operación realizada correctamente.</span>
+    </div>
+    <button type="button" id="closeNotification"><i class="fa-solid fa-xmark"></i></button>
+</div>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase-client.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/administracion.js"></script>
+</body>
+
+</html>

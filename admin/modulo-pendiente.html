@@ -1,1 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Módulo | SNIC'ELECTRIC</title>
+<link rel="icon" href="https://github.com/Francisco1824/proyectosnicelectric/blob/main/img/logo.png?raw=true" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<style>
+body{margin:0;min-height:100vh;background:#f8f9fb;font-family:Montserrat,Arial,sans-serif;display:grid;place-items:center;color:#0A2F6B}.box{width:min(560px,calc(100% - 32px));background:#fff;border-radius:16px;padding:42px;text-align:center;box-shadow:0 12px 35px rgba(10,47,107,.12);border:1px solid #e2e6eb}.icon{width:76px;height:76px;margin:0 auto 20px;border-radius:50%;display:grid;place-items:center;background:#F4B400;color:#0A2F6B;font-size:30px}.box h1{margin:0 0 10px;font-size:23px}.box p{color:#737b87;font-size:13px;line-height:1.7;margin:0 0 25px}.btn{display:inline-flex;padding:12px 18px;border-radius:8px;background:#0A2F6B;color:#fff;text-decoration:none;font-size:12px;font-weight:700}.btn:hover{background:#12478F}
+</style>
+</head>
+<body>
+<main class="box">
+<div class="icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+<h1 id="titulo">Módulo en preparación</h1>
+<p>Esta sección está reservada para la siguiente etapa del sistema administrativo de SNIC'ELECTRIC.</p>
+<a class="btn" href="../dashboard.html" data-permission="inicio.ver">Volver al Dashboard</a>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-client.js"></script>
+    <script src="../js/auth.js?v=35"></script>
+<script>
+if (typeof estaAutenticado === 'function' && !estaAutenticado()) location.href='../login.html';
+const nombres={inventario:'Inventario',cotizaciones:'Cotizaciones',facturas:'Facturas',ordenes:'Orden de servicio',inspecciones:'Inspecciones', 'informe-obra':'Informe de obra',informes:'Informes',configuracion:'Configuración'};
+const modulo=new URLSearchParams(location.search).get('modulo');
+if(modulo&&nombres[modulo]) document.getElementById('titulo').textContent=nombres[modulo]+' — próximo módulo';
+</script>
+</body>
+</html>

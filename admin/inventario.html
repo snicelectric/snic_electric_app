@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gestión de inventario - SNIC'ELECTRIC">
+    <title>Inventario | SNIC'ELECTRIC</title>
+    <link rel="icon" href="https://github.com/Francisco1824/proyectosnicelectric/blob/main/img/logo.png?raw=true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/app-v2.css">
+    <link rel="stylesheet" href="../css/inventario.css">
+</head>
+<body>
+<div class="inventario-app">
+        <!-- =================================================
+            SIDEBAR
+        ================================================== -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo"><img src="https://github.com/Francisco1824/proyectosnicelectric/blob/main/img/logo.png?raw=true" alt="SNIC'ELECTRIC"><div><strong>SNIC'ELECTRIC</strong><span>Administración</span></div></div>
+            <nav class="sidebar-nav">
+                <a href="../dashboard.html" class="nav-item" data-permission="inicio.ver"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
+                <a href="clientes.html" class="nav-item" data-permission="clientes.ver"><i class="fa-solid fa-users"></i><span>Clientes</span></a>
+                <a href="inventario.html" class="nav-item active" data-permission="inventario.ver"><i class="fa-solid fa-boxes-stacked"></i><span>Inventario</span></a>
+                <a href="cotizaciones.html" class="nav-item" data-permission="cotizaciones.ver"><i class="fa-solid fa-file-signature"></i><span>Cotizaciones</span></a>
+                <a href="facturas.html" class="nav-item" data-permission="facturas.ver"><i class="fa-solid fa-file-invoice-dollar"></i><span>Facturas</span></a>
+                <a href="ordenes.html" class="nav-item" data-permission="ordenes.ver"><i class="fa-solid fa-clipboard-list"></i><span>Órdenes de servicio</span></a>
+                <a href="inspecciones.html" class="nav-item" data-permission="inspecciones.ver"><i class="fa-solid fa-magnifying-glass-chart"></i><span>Inspecciones</span></a>
+                <a href="informe-obra.html" class="nav-item" data-permission="informe_obra.ver"><i class="fa-solid fa-file-lines"></i><span>Informe de obra</span></a>
+                <a href="informes.html" class="nav-item" data-permission="informes.ver"><i class="fa-solid fa-chart-column"></i><span>Informes</span></a>
+            <div class="nav-divider"></div>
+                <a href="administracion.html" class="nav-item" data-permission="administracion.ver"><i class="fa-solid fa-user-shield"></i><span>Administración</span></a>
+                <a href="configuracion.html" class="nav-item" data-permission="configuracion.ver"><i class="fa-solid fa-gear"></i><span>Configuración</span></a>
+            </nav>
+        <div class="sidebar-bottom"><button type="button" class="logout-button" data-logout><i class="fa-solid fa-right-from-bracket"></i><span>Cerrar sesión</span></button></div>
+    </aside>
+
+    <main class="main-content">
+        
+        <!-- =================================================
+         TOPBAR
+        ================================================== -->
+
+        <header class="topbar">
+            <button type="button" class="menu-toggle" data-menu-toggle aria-label="Abrir menú"><i class="fa-solid fa-bars"></i></button>
+            <div class="topbar-title"><span>Gestión administrativa</span><h1>Inventario</h1></div>
+            <div class="topbar-user">
+                <div class="topbar-user-info"><strong data-user-name>Usuario</strong><span data-user-role>-</span></div>
+                <div class="user-avatar" id="topbarAvatar" aria-label="Avatar del usuario">US</div>
+            </div>
+        </header>
+
+        <section class="page-content">
+            <div class="page-heading">
+                <div>
+                    <span class="eyebrow">CONTROL DE INVENTARIO</span>
+                    <h2>Administración de inventario</h2>
+                    <p>Registra productos, materiales y servicios que serán utilizados en cotizaciones, órdenes de servicio y facturas.</p>
+                </div>
+                <div class="heading-actions">
+                    <button type="button" class="btn-secondary" id="btnCategorias"><i class="fa-solid fa-tags"></i> Categorías</button>
+                    <button type="button" class="btn-primary" id="btnNuevoProducto" data-permission="inventario.crear"><i class="fa-solid fa-plus"></i> Nuevo producto</button>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card"><div class="stat-icon blue"><i class="fa-solid fa-boxes-stacked"></i></div><div><span>Total productos</span><strong id="totalProductos">0</strong></div></div>
+                <div class="stat-card"><div class="stat-icon green"><i class="fa-solid fa-circle-check"></i></div><div><span>Disponibles</span><strong id="productosDisponibles">0</strong></div></div>
+                <div class="stat-card"><div class="stat-icon yellow"><i class="fa-solid fa-triangle-exclamation"></i></div><div><span>Stock bajo</span><strong id="productosStockBajo">0</strong></div></div>
+                <div class="stat-card"><div class="stat-icon red"><i class="fa-solid fa-box-open"></i></div><div><span>Agotados</span><strong id="productosAgotados">0</strong></div></div>
+                <div class="stat-card"><div class="stat-icon dark"><i class="fa-solid fa-tags"></i></div><div><span>Categorías</span><strong id="totalCategorias">0</strong></div></div>
+            </div>
+
+            <div class="content-card">
+                <div class="toolbar">
+                    <div class="search-box"><i class="fa-solid fa-magnifying-glass"></i><input type="search" id="buscarProducto" placeholder="Buscar por código, nombre, categoría o proveedor..." autocomplete="off"></div>
+                    <div class="toolbar-actions">
+                        <select id="filtroCategoria" class="filter-select"><option value="">Todas las categorías</option></select>
+                        <select id="filtroEstado" class="filter-select"><option value="">Todos los estados</option><option value="activo">Activos</option><option value="inactivo">Inactivos</option></select>
+                        <select id="filtroStock" class="filter-select"><option value="">Todo el stock</option><option value="bajo">Stock bajo</option><option value="agotado">Agotados</option></select>
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="inventario-table">
+                        <thead><tr><th>Codigo</th><th>Producto</th><th>Categoría</th><th>Stock</th><th>Unidad</th><th>Precio venta</th><th>Estado</th><th>Acciones</th></tr></thead>
+                        <tbody id="inventarioTableBody"></tbody>
+                    </table>
+                    <div id="inventarioEmpty" class="empty-state" hidden>
+                        <div class="empty-icon"><i class="fa-solid fa-box-open"></i></div>
+                        <h3>No hay productos registrados</h3>
+                        <p>Comienza creando el primer producto del inventario.</p>
+                        <button type="button" class="btn-primary" id="btnCrearPrimerProducto" data-permission="inventario.crear"><i class="fa-solid fa-plus"></i> Crear producto</button>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="content-card" id="historialMovimientos">
+                <div class="toolbar">
+                    <div>
+                        <span class="eyebrow">CONTROL DE MOVIMIENTOS</span>
+                        <h2 style="margin:4px 0 0;">Historial de movimientos</h2>
+                    </div>
+                    <div class="toolbar-actions">
+                        <select id="filtroMovimientoTipo" class="filter-select">
+                            <option value="">Todos los movimientos</option>
+                            <option value="entrada">Entradas</option>
+                            <option value="salida">Salidas</option>
+                            <option value="ajuste">Ajustes</option>
+                        </select>
+                        <input type="date" id="filtroMovimientoDesde" class="filter-select" aria-label="Fecha desde">
+                        <input type="date" id="filtroMovimientoHasta" class="filter-select" aria-label="Fecha hasta">
+                        <button type="button" class="btn-secondary" id="btnLimpiarFiltrosMovimientos">
+                            <i class="fa-solid fa-rotate-left"></i> Limpiar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="search-box" style="margin-bottom:16px;">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="search" id="buscarMovimiento"
+                           placeholder="Buscar por código, producto, usuario o motivo..."
+                           autocomplete="off">
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="inventario-table movimientos-table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Producto</th>
+                                <th>Tipo</th>
+                                <th>Cantidad</th>
+                                <th>Stock anterior</th>
+                                <th>Stock nuevo</th>
+                                <th>Usuario</th>
+                                <th>Motivo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="movimientosTableBody"></tbody>
+                    </table>
+
+                    <div id="movimientosEmpty" class="empty-state" hidden>
+                        <div class="empty-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                        <h3>No hay movimientos</h3>
+                        <p>No existen movimientos que coincidan con los filtros seleccionados.</p>
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+    </main>
+</div>
+
+<!-- MODAL PRODUCTO -->
+<div class="modal-overlay" id="productoModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalProductoTitulo">
+        <div class="modal-header"><div><span class="modal-eyebrow">REGISTRO DE INVENTARIO</span><h2 id="modalProductoTitulo">Nuevo producto</h2></div><button type="button" class="modal-close" id="btnCerrarProducto" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button></div>
+        <form id="productoForm" autocomplete="off">
+            <input type="hidden" id="productoId">
+            <div class="form-section">
+                <div class="form-section-title"><i class="fa-solid fa-box"></i><span>Información del producto</span></div>
+                <div class="form-grid">
+                    <div class="form-group"><label for="codigoProducto">Código</label><input type="text" id="codigoProducto" readonly placeholder="Automático"><small>Se genera automáticamente.</small></div>
+                    <div class="form-group"><label for="nombreProducto">Nombre <span>*</span></label><input type="text" id="nombreProducto" required placeholder="Ej. Cable THHN calibre 12"></div>
+                    <div class="form-group"><label for="categoriaProducto">Categoría <span>*</span></label><select id="categoriaProducto" required></select></div>
+                    <div class="form-group"><label for="unidadProducto">Unidad <span>*</span></label><select id="unidadProducto" required><option value="unidad">Unidad</option><option value="metro">Metro</option><option value="rollo">Rollo</option><option value="caja">Caja</option><option value="litro">Litro</option><option value="kg">Kilogramo</option><option value="servicio">Servicio</option></select></div>
+                    <div class="form-group form-full"><label for="descripcionProducto">Descripción</label><textarea id="descripcionProducto" rows="3" placeholder="Descripción técnica o comercial del producto..."></textarea></div>
+                </div>
+            </div>
+            <div class="form-section">
+                <div class="form-section-title"><i class="fa-solid fa-warehouse"></i><span>Existencias y precios</span></div>
+                <div class="form-grid">
+                    <div class="form-group"><label for="stockProducto">Existencia <span>*</span></label><input type="number" id="stockProducto" min="0" step="0.01" required value="0"></div>
+                    <div class="form-group"><label for="stockMinimoProducto">Stock mínimo</label><input type="number" id="stockMinimoProducto" min="0" step="0.01" value="0"></div>
+                    <div class="form-group"><label for="precioCompraProducto">Precio compra</label><input type="number" id="precioCompraProducto" min="0" step="0.01" value="0"></div>
+                    <div class="form-group"><label for="precioVentaProducto">Precio venta <span>*</span></label><input type="number" id="precioVentaProducto" min="0" step="0.01" required value="0"></div>
+                    <div class="form-group"><label for="proveedorProducto">Proveedor</label><input type="text" id="proveedorProducto" placeholder="Proveedor habitual"></div>
+                    <div class="form-group"><label for="ubicacionProducto">Ubicación</label><input type="text" id="ubicacionProducto" placeholder="Estante, bodega, etc."></div>
+                </div>
+            </div>
+            <div class="form-section">
+                <div class="form-section-title"><i class="fa-solid fa-toggle-on"></i><span>Estado</span></div>
+                <div class="form-grid"><div class="form-group"><label for="estadoProducto">Estado</label><select id="estadoProducto"><option value="activo">Activo</option><option value="inactivo">Inactivo</option></select></div></div>
+            </div>
+            <div class="modal-footer"><button type="button" class="btn-secondary" id="btnCancelarProducto">Cancelar</button><button type="submit" class="btn-primary" data-permission="inventario.crear" id="btnGuardarProducto"><i class="fa-solid fa-floppy-disk"></i> Guardar producto</button></div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL DETALLE -->
+<div class="modal-overlay" id="detalleModal" aria-hidden="true"><div class="modal modal-detail"><div class="modal-header"><div><span class="modal-eyebrow">INFORMACIÓN DEL INVENTARIO</span><h2>Detalle del producto</h2></div><button type="button" class="modal-close" id="btnCerrarDetalle"><i class="fa-solid fa-xmark"></i></button></div><div id="detalleProductoContent" class="detail-content"></div></div></div>
+
+<!-- MODAL MOVIMIENTO -->
+<div class="modal-overlay" id="movimientoModal" aria-hidden="true"><div class="modal modal-small"><div class="modal-header"><div><span class="modal-eyebrow">CONTROL DE EXISTENCIAS</span><h2>Registrar movimiento</h2></div><button type="button" class="modal-close" id="btnCerrarMovimiento"><i class="fa-solid fa-xmark"></i></button></div><form id="movimientoForm"><input type="hidden" id="movimientoProductoId"><div class="form-section"><div class="form-grid"><div class="form-group form-full"><label>Producto</label><input type="text" id="movimientoProductoNombre" readonly></div><div class="form-group"><label for="tipoMovimiento">Tipo <span>*</span></label><select id="tipoMovimiento" required><option value="entrada">Entrada</option><option value="salida">Salida</option></select></div><div class="form-group"><label for="cantidadMovimiento">Cantidad <span>*</span></label><input type="number" id="cantidadMovimiento" min="0.01" step="0.01" required></div><div class="form-group form-full"><label for="motivoMovimiento">Motivo</label><input type="text" id="motivoMovimiento" placeholder="Compra, consumo, ajuste, devolución..."></div></div></div><div class="modal-footer"><button type="button" class="btn-secondary" id="btnCancelarMovimiento">Cancelar</button><button type="submit" class="btn-primary"><i class="fa-solid fa-arrows-rotate"></i> Registrar</button></div></form></div></div>
+
+<!-- MODAL CATEGORÍAS -->
+<div class="modal-overlay" id="categoriasModal" aria-hidden="true"><div class="modal modal-category"><div class="modal-header"><div><span class="modal-eyebrow">CLASIFICACIÓN</span><h2>Categorías de inventario</h2></div><button type="button" class="modal-close" id="btnCerrarCategorias"><i class="fa-solid fa-xmark"></i></button></div><div class="category-create"><div class="category-create-fields"><input type="text" id="nuevaCategoria" placeholder="Nombre de la nueva categoría"><input type="text" id="nuevoPrefijoCategoria" placeholder="Prefijo (MAT)" maxlength="4" autocomplete="off"></div><button type="button" class="btn-primary" id="btnCrearCategoria"><i class="fa-solid fa-plus"></i> Agregar</button></div><div id="categoriasLista" class="categories-list"></div></div></div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><i id="toastIcon"></i><span id="toastMessage"></span></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-client.js"></script>
+    <script src="../js/auth.js?v=35"></script>
+<script src="../js/inventario.js?v=37"></script>
+</body>
+</html>

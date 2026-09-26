@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Informe de obra - SNIC'ELECTRIC">
+<title>Informe de obra | SNIC'ELECTRIC</title>
+<link rel="icon" href="https://github.com/Francisco1824/proyectosnicelectric/blob/main/img/logo.png?raw=true" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/app-v2.css">
+<link rel="stylesheet" href="../css/informe-obra.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+<div class="obra-app">
+        <!-- =================================================
+            SIDEBAR
+        ================================================== -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo"><img src="https://github.com/Francisco1824/proyectosnicelectric/blob/main/img/logo.png?raw=true" alt="SNIC'ELECTRIC"><div><strong>SNIC'ELECTRIC</strong><span>Administración</span></div></div>
+            <nav class="sidebar-nav">
+                <a href="../dashboard.html" class="nav-item" data-permission="inicio.ver"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
+                <a href="clientes.html" class="nav-item" data-permission="clientes.ver"><i class="fa-solid fa-users"></i><span>Clientes</span></a>
+                <a href="inventario.html" class="nav-item" data-permission="inventario.ver"><i class="fa-solid fa-boxes-stacked"></i><span>Inventario</span></a>
+                <a href="cotizaciones.html" class="nav-item" data-permission="cotizaciones.ver"><i class="fa-solid fa-file-signature"></i><span>Cotizaciones</span></a>
+                <a href="facturas.html" class="nav-item" data-permission="facturas.ver"><i class="fa-solid fa-file-invoice-dollar"></i><span>Facturas</span></a>
+                <a href="ordenes.html" class="nav-item" data-permission="ordenes.ver"><i class="fa-solid fa-clipboard-list"></i><span>Órdenes de servicio</span></a>
+                <a href="inspecciones.html" class="nav-item" data-permission="inspecciones.ver"><i class="fa-solid fa-magnifying-glass-chart"></i><span>Inspecciones</span></a>
+                <a href="informe-obra.html" class="nav-item active" data-permission="informe_obra.ver"><i class="fa-solid fa-file-lines"></i><span>Informe de obra</span></a>
+                <a href="informes.html" class="nav-item" data-permission="informes.ver"><i class="fa-solid fa-chart-column"></i><span>Informes</span></a>
+            <div class="nav-divider"></div>
+                <a href="administracion.html" class="nav-item" data-permission="administracion.ver"><i class="fa-solid fa-user-shield"></i><span>Administración</span></a>
+                <a href="configuracion.html" class="nav-item" data-permission="configuracion.ver"><i class="fa-solid fa-gear"></i><span>Configuración</span></a>
+            </nav>
+        <div class="sidebar-bottom"><button type="button" class="logout-button" data-logout><i class="fa-solid fa-right-from-bracket"></i><span>Cerrar sesión</span></button></div>
+    </aside>
+  <main class="main-content">
+    
+    <!-- =================================================
+         TOPBAR
+    ================================================== -->
+
+    <header class="topbar">
+        <button type="button" class="menu-toggle" data-menu-toggle aria-label="Abrir menú"><i class="fa-solid fa-bars"></i></button>
+        <div class="topbar-title"><span>Gestión administrativa</span><h1>Informe de obra</h1></div>
+        <div class="topbar-user">
+            <div class="topbar-user-info"><strong data-user-name>Usuario</strong><span data-user-role>-</span></div>
+            <div class="user-avatar" id="topbarAvatar" aria-label="Avatar del usuario">US</div>
+        </div>
+    </header>
+
+    <section class="page-content">
+      <div class="page-heading">
+        <div>
+          <span class="eyebrow">EJECUCIÓN DEL SERVICIO</span>
+          <h2>Informe de obra</h2>
+          <p>Registra el trabajo realizado, materiales, observaciones y evidencias fotográficas de cada orden de servicio.</p>
+        </div>
+        <button type="button" class="btn-primary" id="btnNuevoInforme"><i class="fa-solid fa-plus"></i> Nuevo informe</button>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-icon blue"><i class="fa-solid fa-file-lines"></i></div><div><span>Total informes</span><strong id="statTotal">0</strong></div></div>
+        <div class="stat-card"><div class="stat-icon yellow"><i class="fa-solid fa-pen-to-square"></i></div><div><span>Borradores</span><strong id="statBorradores">0</strong></div></div>
+        <div class="stat-card"><div class="stat-icon orange"><i class="fa-solid fa-person-digging"></i></div><div><span>En ejecución</span><strong id="statProceso">0</strong></div></div>
+        <div class="stat-card"><div class="stat-icon green"><i class="fa-solid fa-circle-check"></i></div><div><span>Finalizados</span><strong id="statFinalizados">0</strong></div></div>
+      </div>
+
+      <div class="table-panel">
+        <div class="filters">
+          <div class="search-box"><i class="fa-solid fa-magnifying-glass"></i><input id="buscarInforme" type="search" placeholder="Buscar por informe, orden, cliente o técnico..."></div>
+          <select id="filtroEstado">
+            <option value="">Todos los estados</option>
+            <option value="borrador">Borradores</option>
+            <option value="en_proceso">En ejecución</option>
+            <option value="finalizado">Finalizados</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>INFORME</th><th>ORDEN</th><th>CLIENTE</th><th>FECHA</th><th>TÉCNICO</th><th>ESTADO</th><th>ACCIONES</th></tr></thead>
+            <tbody id="tablaInformes"></tbody>
+          </table>
+          <div class="empty" id="emptyInformes">
+            <i class="fa-solid fa-file-circle-check"></i>
+            <h3>No hay informes de obra</h3>
+            <p>Los informes creados por el equipo aparecerán aquí.</p>
+            <button type="button" class="btn-primary small" id="btnCrearPrimero"><i class="fa-solid fa-plus"></i> Crear informe</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="modal" id="informeModal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <div><span class="eyebrow">INFORME DE OBRA</span><h3 id="modalTitulo">Nuevo informe</h3></div>
+      <button type="button" class="icon-close" id="btnCerrarModal" aria-label="Cerrar">×</button>
+    </div>
+    <form id="informeForm">
+      <input type="hidden" id="informeId">
+      <div class="form-grid three">
+        <label>Orden de servicio
+          <select id="ordenInforme" required><option value="">Seleccionar orden...</option></select>
+        </label>
+        <label>Cliente
+          <input id="clienteInforme" readonly placeholder="Se completa desde la orden">
+        </label>
+        <label>Fecha del trabajo
+          <input id="fechaInforme" type="date" required>
+        </label>
+      </div>
+
+      <div class="form-grid two">
+        <label>Técnico / responsable
+          <input id="tecnicoInforme" required>
+        </label>
+        <label>Lugar de la obra
+          <input id="lugarInforme" placeholder="Dirección del servicio">
+        </label>
+      </div>
+
+      <label>Trabajo realizado
+        <textarea id="trabajoInforme" rows="5" required placeholder="Describe detalladamente qué se realizó en la obra..."></textarea>
+      </label>
+
+      <div class="subhead">
+        <div><span class="section-label">MATERIALES UTILIZADOS</span><h4>Materiales y cantidades</h4></div>
+        <button type="button" class="btn-light" id="btnAgregarMaterial"><i class="fa-solid fa-plus"></i> Agregar material</button>
+      </div>
+      <div class="items-wrap">
+        <table class="items">
+          <thead><tr><th>PRODUCTO / MATERIAL</th><th>UNIDAD</th><th>CANTIDAD</th><th>OBSERVACIÓN</th><th></th></tr></thead>
+          <tbody id="materialesBody"></tbody>
+        </table>
+        <div class="items-empty" id="materialesEmpty">No se han agregado materiales.</div>
+      </div>
+
+      <label>Observaciones
+        <textarea id="observacionesInforme" rows="4" placeholder="Observaciones, recomendaciones o novedades encontradas durante el trabajo..."></textarea>
+      </label>
+
+      <div class="subhead">
+        <div><span class="section-label">EVIDENCIA</span><h4>Fotografías de la obra</h4></div>
+        <label class="btn-light file-button"><i class="fa-solid fa-camera"></i> Agregar fotos<input id="fotosInforme" type="file" accept="image/*" multiple></label>
+      </div>
+      <div id="fotosPreview" class="photos-grid"></div>
+
+      <label>Estado del informe
+        <select id="estadoInforme">
+          <option value="borrador">Borrador</option>
+          <option value="en_proceso">En ejecución</option>
+          <option value="finalizado">Finalizado</option>
+        </select>
+      </label>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-light" id="btnCancelar">Cancelar</button>
+        <button type="submit" class="btn-primary"><i class="fa-solid fa-floppy-disk"></i> Guardar informe</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="detalleModal" aria-hidden="true">
+  <div class="modal-card detail-modal">
+    <div class="modal-head">
+      <div><span class="eyebrow">DETALLE</span><h3 id="detalleTitulo">Informe</h3></div>
+      <button type="button" class="icon-close" id="btnCerrarDetalle">×</button>
+    </div>
+    <div id="detalleContenido"></div>
+    <div class="modal-actions">
+      <button type="button" class="btn-light" id="btnCerrarDetalle2">Cerrar</button>
+      <button type="button" class="btn-primary" id="btnImprimir"><i class="fa-solid fa-print"></i> Imprimir / PDF</button>
+    </div>
+  </div>
+</div>
+<div class="modal" id="estadoModal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <div><span class="eyebrow">ESTADO</span><h3 id="estadoModalTitulo">Cambiar Estado</h3></div>
+      <button type="button" class="icon-close" id="btnCerrarEstadoModal" aria-label="Cerrar">×</button>
+    </div>
+    <form id="estadoForm">
+      <div style="margin: 1.5rem 0;">
+        <label style="display: flex; flex-direction: column; gap: 0.5rem; font-weight: 600; color: #16233b;">
+          Selecciona el nuevo estado:
+          <select id="nuevoEstadoSelect" required style="padding: 0.6rem; border: 1px solid #dbe3ee; border-radius: 6px; font-size: 0.95rem;">
+            <option value="borrador">Borrador</option>
+            <option value="en_proceso">En ejecución</option>
+            <option value="finalizado">Finalizado</option>
+          </select>
+        </label>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-light" id="btnCancelarEstado">Cancelar</button>
+        <button type="submit" class="btn-primary"><i class="fa-solid fa-rotate"></i> Guardar Estado</button>
+      </div>
+    </form>
+  </div>
+</div><div class="toast" id="toast"><i id="toastIcon" class="fa-solid fa-circle-check"></i><span id="toastMessage"></span></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-client.js"></script>
+    <script src="../js/auth.js?v=35"></script>
+<script src="../js/informe-obra.js"></script>
+</body>
+</html>
