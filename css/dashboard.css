@@ -1,0 +1,1141 @@
+/* =========================================================
+   SNIC'ELECTRIC
+   DASHBOARD.CSS
+   Diseño exclusivo del Dashboard
+
+   IMPORTANTE:
+   - Las tarjetas estadísticas NO se controlan aquí.
+   - .stats-grid
+   - .stat-card
+   - .stat-icon
+   - .stat-info
+   - responsive de estadísticas
+
+   Todo eso pertenece a app_v2.css.
+========================================================= */
+
+
+/* =========================================================
+   VARIABLES LOCALES DEL DASHBOARD
+========================================================= */
+
+:root {
+
+    --dashboard-blue: #0A2F6B;
+    --dashboard-blue-dark: #06234F;
+    --dashboard-blue-medium: #164A91;
+
+    --dashboard-yellow: #F4B400;
+    --dashboard-yellow-light: #FFD45C;
+    --dashboard-yellow-soft: #FFF4CC;
+
+    --dashboard-white: #FFFFFF;
+    --dashboard-black: #111111;
+
+    --dashboard-gray-50: #F7F8FA;
+    --dashboard-gray-100: #F1F3F6;
+    --dashboard-gray-200: #E2E6EC;
+    --dashboard-gray-300: #CBD1DA;
+    --dashboard-gray-500: #687386;
+    --dashboard-gray-700: #374151;
+
+    --dashboard-green: #198754;
+    --dashboard-red: #DC3545;
+
+    --dashboard-shadow:
+        0 8px 25px rgba(10, 47, 107, 0.08);
+
+    --dashboard-shadow-strong:
+        0 15px 40px rgba(10, 47, 107, 0.15);
+
+    --dashboard-radius: 14px;
+}
+
+
+/* =========================================================
+   BASE DEL DASHBOARD
+========================================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--dashboard-gray-50);
+    color: var(--dashboard-black);
+}
+
+
+/* =========================================================
+   CONTENIDO PRINCIPAL
+   El layout general del sidebar también lo controla
+   app_v2.css.
+========================================================= */
+
+.main-content {
+    margin-left: var(--sidebar-width, 243px);
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.topbar {
+    height: 82px;
+    min-height: 82px;
+
+    padding: 0 24px 0 30px;
+
+    background: var(--dashboard-white);
+
+    border-bottom: 1px solid var(--dashboard-gray-200);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    position: relative;
+    z-index: 100;
+}
+
+
+.menu-toggle {
+    display: none;
+
+    width: 36px;
+    height: 36px;
+
+    border: 1px solid var(--dashboard-gray-200);
+    border-radius: 7px;
+
+    background: var(--dashboard-white);
+    color: var(--dashboard-blue);
+
+    cursor: pointer;
+
+    place-items: center;
+}
+
+
+.topbar-title {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+
+.topbar-title span {
+    color: #B47B00;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+
+.topbar-title h1 {
+    margin: 0;
+
+    color: var(--dashboard-blue);
+
+    font-size: 24px;
+    line-height: 1.1;
+
+    font-weight: 800;
+}
+
+
+.topbar-right {
+    display: none;
+}
+
+
+.user-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.user-box > div:first-child {
+    text-align: right;
+}
+
+
+.user-box strong {
+    display: block;
+
+    color: #102E59;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+.user-box small {
+    display: block;
+
+    color: #8995A6;
+
+    font-size: 9px;
+
+    margin-top: 4px;
+}
+
+
+.avatar {
+    width: 40px;
+    height: 40px;
+
+    border: 1px solid var(--dashboard-yellow);
+    border-radius: 50%;
+
+    background: #FFF9E7;
+
+    color: var(--dashboard-blue);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   CONTENIDO DEL DASHBOARD
+========================================================= */
+
+.dashboard-content {
+    padding: 28px 30px 45px;
+}
+
+
+/* =========================================================
+   BIENVENIDA
+   Se utiliza como encabezado limpio del Dashboard.
+========================================================= */
+
+.welcome-section {
+    position: relative;
+
+    min-height: auto;
+
+    padding: 8px 0 20px;
+
+    border-radius: 0;
+
+    background: transparent;
+
+    color: #182230;
+
+    box-shadow: none;
+
+    overflow: visible;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+
+.welcome-section::before,
+.welcome-section::after {
+    display: none;
+}
+
+
+.welcome-label {
+    color: #B47B00;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+
+.welcome-section h2 {
+    margin: 7px 0 0;
+
+    color: var(--dashboard-blue);
+
+    font-size: 28px;
+    line-height: 1.15;
+
+    font-weight: 800;
+}
+
+
+.welcome-section p {
+    margin: 7px 0 0;
+
+    max-width: 800px;
+
+    color: #7C899A;
+
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+
+.welcome-icon {
+    display: none;
+}
+
+
+/* =========================================================
+   IMPORTANTE:
+   LAS ESTADÍSTICAS SE CONTROLAN DESDE app_v2.css
+
+   NO DEFINIR AQUÍ:
+
+   .stats-grid
+   .stats
+   .stat-card
+   .stat-icon
+   .stat-info
+   .stat-info span
+   .stat-info strong
+   .blue-card
+   .yellow-card
+
+   Esto evita que Dashboard rompa las tarjetas usadas
+   por otros módulos.
+========================================================= */
+
+/* =========================================================
+   DASHBOARD · TARJETA PRODUCTOS
+   Ocupa el ancho de 2 tarjetas normales
+========================================================= */
+
+.productos-stat-card {
+    grid-column: span 2 !important;
+
+    min-height: 108px !important;
+    height: 108px !important;
+
+    padding: 14px 18px !important;
+
+    align-items: center !important;
+    overflow: hidden !important;
+}
+
+/* Contenido interno */
+.productos-stat-card .stat-content {
+    min-width: 0 !important;
+    flex: 1 !important;
+    overflow: hidden !important;
+}
+
+/* Etiqueta */
+.productos-stat-card .stat-label {
+    display: block !important;
+    color: #8490A0 !important;
+    font-size: 9px !important;
+    font-weight: 600 !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+}
+
+/* Número */
+.productos-stat-card .stat-number {
+    display: block !important;
+    margin-top: 4px !important;
+    color: #0A2F6B !important;
+    font-size: 24px !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
+}
+
+/* Categorías */
+.productos-stat-card .productos-categorias {
+    display: flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+
+    margin-top: 6px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+
+    color: #7C899A !important;
+    font-size: 7.5px !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+/* Categorías individuales */
+.productos-stat-card .productos-categorias .categoria-item {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 3px !important;
+
+    flex-shrink: 0 !important;
+
+    padding: 2px 5px !important;
+
+    background: #F5F7FA !important;
+    border: 1px solid #E4E9EF !important;
+    border-radius: 5px !important;
+
+    color: #657387 !important;
+    font-size: 7px !important;
+}
+
+/* Nombre de categoría */
+.productos-stat-card .categoria-nombre {
+    max-width: 100px !important;
+
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+/* Cantidad */
+.productos-stat-card .categoria-cantidad {
+    color: #0A2F6B !important;
+    font-size: 7px !important;
+    font-weight: 800 !important;
+}
+
+/* =========================================================
+   RESPONSIVE
+   En tablet y móvil vuelve a ocupar una sola columna
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .productos-stat-card {
+        grid-column: span 1 !important;
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .productos-stat-card {
+        grid-column: span 1 !important;
+
+        height: 104px !important;
+        min-height: 104px !important;
+    }
+
+}
+
+
+
+/* =========================================================
+   CABECERA DE SECCIÓN
+========================================================= */
+
+.section-header {
+    margin: 28px 0 15px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+
+.section-header > div {
+    min-width: 0;
+}
+
+
+.section-header span {
+    color: #B47B00;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+}
+
+
+.section-header h2 {
+    margin: 6px 0 0;
+
+    color: var(--dashboard-blue);
+
+    font-size: 20px;
+    line-height: 1.2;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   MÓDULOS DEL SISTEMA
+========================================================= */
+
+.modules-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+
+.module-card {
+    position: relative;
+
+    min-height: 120px;
+
+    padding: 17px;
+
+    background: var(--dashboard-white);
+
+    border: 1px solid #DDE4EC;
+
+    border-radius: 11px;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 14px;
+
+    overflow: hidden;
+
+    box-shadow: none;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.module-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 3px;
+    height: 100%;
+
+    background: var(--dashboard-blue);
+}
+
+
+.module-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #DDE4EC;
+
+    box-shadow:
+        0 8px 22px rgba(10, 47, 107, 0.08);
+}
+
+
+/* =========================================================
+   ICONOS DE MÓDULOS
+========================================================= */
+
+.module-icon {
+    width: 44px;
+    height: 44px;
+
+    min-width: 44px;
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+
+    flex-shrink: 0;
+}
+
+
+.module-icon.blue {
+    background: #EAF1FB;
+    color: var(--dashboard-blue);
+}
+
+
+.module-icon.yellow {
+    background: #FFF1C7;
+    color: #B47B00;
+}
+
+
+/* =========================================================
+   CONTENIDO DE MÓDULOS
+========================================================= */
+
+.module-card > div:not(.module-icon) {
+    min-width: 0;
+}
+
+
+.module-card h3 {
+    margin: 2px 0 0;
+
+    color: #102E59;
+
+    font-size: 12px;
+    line-height: 1.25;
+
+    font-weight: 800;
+}
+
+
+.module-card p {
+    margin: 7px 0 0;
+
+    max-width: 220px;
+
+    color: #7C899A;
+
+    font-size: 10px;
+    line-height: 1.55;
+}
+
+
+.module-arrow {
+    position: absolute;
+
+    right: 15px;
+    bottom: 15px;
+
+    color: var(--dashboard-gray-300);
+
+    font-size: 12px;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.module-card:hover .module-arrow {
+    color: var(--dashboard-yellow);
+
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   PARTE INFERIOR DEL DASHBOARD
+========================================================= */
+
+.dashboard-bottom {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.35fr)
+        minmax(280px, 1fr);
+
+    gap: 16px;
+
+    margin-top: 16px;
+}
+
+
+/* =========================================================
+   PANELES INFERIORES
+========================================================= */
+
+.activity-panel,
+.summary-panel {
+    background: var(--dashboard-white);
+
+    border: 1px solid #DDE4EC;
+
+    border-radius: 11px;
+
+    box-shadow: none;
+
+    overflow: hidden;
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   CABECERA DE PANELES
+========================================================= */
+
+.panel-header {
+    min-height: 68px;
+
+    padding: 16px 18px;
+
+    border-bottom:
+        1px solid var(--dashboard-gray-200);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+}
+
+
+.panel-header > div {
+    min-width: 0;
+}
+
+
+.panel-header span {
+    display: block;
+
+    color: #B47B00;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+}
+
+
+.panel-header h2 {
+    margin: 5px 0 0;
+
+    color: var(--dashboard-blue);
+
+    font-size: 15px;
+    line-height: 1.2;
+
+    font-weight: 800;
+}
+
+
+.panel-header > i {
+    width: 36px;
+    height: 36px;
+
+    min-width: 36px;
+
+    border-radius: 9px;
+
+    background: #FFF1C7;
+
+    color: #B47B00;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================================================
+   ACTIVIDAD
+========================================================= */
+
+.activity-list {
+    min-height: 180px;
+}
+
+
+.empty-state {
+    min-height: 180px;
+
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    color: var(--dashboard-gray-500);
+
+    text-align: center;
+}
+
+
+.empty-state i {
+    font-size: 28px;
+
+    color: var(--dashboard-yellow);
+}
+
+
+.empty-state p {
+    margin: 0;
+
+    font-size: 10px;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   PERFIL
+========================================================= */
+
+.profile-summary {
+    padding: 25px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+}
+
+
+.profile-large-avatar {
+    width: 76px;
+    height: 76px;
+
+    padding: 4px;
+
+    border-radius: 50%;
+
+    background: var(--dashboard-yellow);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.profile-large-avatar span {
+    width: 100%;
+    height: 100%;
+
+    border-radius: 50%;
+
+    background: var(--dashboard-blue);
+
+    color: var(--dashboard-white);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 19px;
+    font-weight: 800;
+}
+
+
+.profile-summary h3 {
+    margin: 13px 0 0;
+
+    color: var(--dashboard-black);
+
+    font-size: 14px;
+
+    font-weight: 800;
+}
+
+
+.profile-role {
+    margin-top: 5px;
+
+    padding: 5px 11px;
+
+    border-radius: 20px;
+
+    background: var(--dashboard-yellow-soft);
+
+    color: var(--dashboard-blue);
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+.profile-summary p {
+    margin: 10px 0 0;
+
+    color: var(--dashboard-gray-500);
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   TOAST DEL DASHBOARD
+========================================================= */
+
+.dashboard-toast {
+    position: fixed;
+
+    right: 25px;
+    bottom: 25px;
+
+    z-index: 5000;
+
+    max-width: 330px;
+
+    padding: 14px 18px;
+
+    background: var(--dashboard-blue);
+
+    color: var(--dashboard-white);
+
+    border-left:
+        4px solid var(--dashboard-yellow);
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.20);
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(15px);
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.dashboard-toast.show {
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   ANIMACIÓN
+========================================================= */
+
+@keyframes dashboardFadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+.welcome-section,
+.module-card,
+.activity-panel,
+.summary-panel {
+    animation:
+        dashboardFadeIn 0.45s ease both;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+.dashboard-content::-webkit-scrollbar {
+    width: 7px;
+}
+
+
+.dashboard-content::-webkit-scrollbar-track {
+    background: var(--dashboard-gray-100);
+}
+
+
+.dashboard-content::-webkit-scrollbar-thumb {
+    background: var(--dashboard-blue);
+
+    border-radius: 10px;
+}
+
+
+.dashboard-content::-webkit-scrollbar-thumb:hover {
+    background: var(--dashboard-yellow);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .modules-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 850px) {
+
+    .sidebar {
+        width: var(--sidebar-width, 243px);
+
+        transform: translateX(-100%);
+
+        transition:
+            transform 0.2s ease;
+    }
+
+
+    .sidebar.open,
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+
+    .main-content {
+        margin-left: 0;
+    }
+
+
+    .menu-toggle {
+        display: grid;
+    }
+
+
+    .dashboard-bottom {
+        grid-template-columns: 1fr;
+    }
+
+
+    .dashboard-content {
+        padding:
+            25px
+            20px
+            40px;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .topbar {
+        height: 76px;
+        min-height: 76px;
+
+        padding:
+            0
+            16px;
+    }
+
+
+    .topbar-title span {
+        font-size: 9px;
+    }
+
+
+    .topbar-title h1 {
+        font-size: 20px;
+    }
+
+
+    .user-box > div:first-child {
+        display: none;
+    }
+
+
+    .dashboard-content {
+        padding:
+            20px
+            15px
+            40px;
+    }
+
+
+    .welcome-section {
+        padding-top: 5px;
+    }
+
+
+    .welcome-section h2 {
+        font-size: 23px;
+    }
+
+
+    .welcome-section p {
+        font-size: 10px;
+        line-height: 1.5;
+    }
+
+
+    .modules-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .module-card {
+        min-height: 110px;
+    }
+
+
+    .dashboard-bottom {
+        grid-template-columns: 1fr;
+    }
+
+
+    .panel-header {
+        padding:
+            14px
+            15px;
+    }
+
+
+    .profile-summary {
+        padding: 20px;
+    }
+
+}
+
+
+/* =========================================================
+   IMPRESIÓN
+========================================================= */
+
+@media print {
+
+    .sidebar,
+    .topbar,
+    .menu-toggle {
+        display: none !important;
+    }
+
+
+    .main-content {
+        margin-left: 0 !important;
+
+        width: 100% !important;
+    }
+
+
+    .dashboard-content {
+        padding: 0 !important;
+    }
+
+
+    .dashboard-toast {
+        display: none !important;
+    }
+
+}

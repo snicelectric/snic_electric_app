@@ -1,0 +1,246 @@
+
+/* SNIC'ELECTRIC · Configuración */
+.config-page{
+  padding:32px 30px 45px;
+  position:relative;
+}
+.config-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:24px;
+  margin-bottom:22px;
+}
+.config-head h2{
+  margin:5px 0 0;
+  color:#0A2F6B;
+  font-size:27px;
+  line-height:1.1;
+  font-weight:800;
+}
+.config-head p{
+  margin:8px 0 0;
+  color:#8490A0;
+  font-size:10px;
+}
+.config-head-actions{
+  display:flex;
+  gap:8px;
+  flex-shrink:0;
+}
+.config-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+}
+.config-card{
+  background:#fff;
+  border:1px solid #DDE4EC;
+  border-top:4px solid #F4B400;
+  border-radius:11px;
+  padding:19px;
+  box-shadow:none;
+}
+.config-card-title{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:17px;
+}
+.config-card-title h3{
+  margin:2px 0 5px;
+  color:#0A2F6B;
+  font-size:13px;
+  font-weight:800;
+}
+.config-card-title p{
+  margin:0;
+  color:#8490A0;
+  font-size:9px;
+  line-height:1.45;
+}
+.config-icon{
+  width:40px;
+  height:40px;
+  min-width:40px;
+  border-radius:9px;
+  display:grid;
+  place-items:center;
+  font-size:16px;
+}
+.config-icon.blue{background:#EAF1FB;color:#0A2F6B}
+.config-icon.yellow{background:#FFF2C8;color:#B27B00}
+.config-icon.green{background:#E8F6ED;color:#238B45}
+.config-icon.dark{background:#EAF1FB;color:#08295D}
+.config-form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+.config-form-grid label{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  color:#617086;
+  font-size:9px;
+  font-weight:700;
+}
+.config-form-grid label.full{grid-column:1/-1}
+.config-form-grid input,
+.config-form-grid select,
+.config-form-grid textarea{
+  width:100%;
+  min-height:38px;
+  padding:8px 10px;
+  border:1px solid #D3DCE8;
+  border-radius:7px;
+  background:#fff;
+  color:#30445F;
+  font-family:inherit;
+  font-size:10px;
+  outline:none;
+}
+.config-form-grid textarea{
+  min-height:72px;
+  resize:vertical;
+}
+.config-form-grid input:focus,
+.config-form-grid select:focus,
+.config-form-grid textarea:focus{
+  border-color:#9FB5D1;
+  box-shadow:0 0 0 3px rgba(10,47,107,.05);
+}
+.checkbox-row{
+  flex-direction:row!important;
+  align-items:center;
+  gap:9px!important;
+  padding:9px 10px;
+  border:1px solid #E3E8EF;
+  border-radius:7px;
+  background:#FBFCFE;
+}
+.checkbox-row input{
+  width:16px!important;
+  min-height:16px!important;
+  accent-color:#F4B400;
+}
+.config-actions-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.config-action{
+  min-height:72px;
+  padding:11px;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  text-align:left;
+  border:1px solid #DDE4EC;
+  border-radius:8px;
+  background:#fff;
+  color:#0A2F6B;
+  cursor:pointer;
+}
+.config-action:hover{
+  background:#FBFCFE;
+  border-color:#C8D4E3;
+}
+.config-action > i{
+  width:35px;
+  height:35px;
+  min-width:35px;
+  display:grid;
+  place-items:center;
+  border-radius:8px;
+  background:#EAF1FB;
+}
+.config-action span{display:flex;flex-direction:column;gap:4px}
+.config-action strong{font-size:10px}
+.config-action small{font-size:8px;line-height:1.35;color:#8490A0;font-weight:500}
+.config-note{
+  margin-top:11px;
+  padding:10px 11px;
+  border-radius:7px;
+  background:#FFF8E6;
+  color:#8B6B20;
+  font-size:8px;
+  line-height:1.45;
+}
+.config-note i{margin-right:5px}
+.security-panel{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-bottom:13px;
+}
+.security-panel > div{
+  min-height:61px;
+  padding:10px;
+  border:1px solid #E3E8EF;
+  border-radius:7px;
+  background:#FBFCFE;
+}
+.security-panel span{
+  display:block;
+  color:#8490A0;
+  font-size:8px;
+  margin-bottom:5px;
+}
+.security-panel strong{
+  display:block;
+  color:#0A2F6B;
+  font-size:9px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.security-panel .access-ok{color:#238B45}
+.config-admin-link{
+  width:100%;
+  min-height:39px;
+  text-decoration:none;
+}
+.config-toast{
+  position:fixed;
+  right:25px;
+  bottom:25px;
+  z-index:5000;
+  min-width:260px;
+  max-width:390px;
+  padding:12px 15px;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  border:1px solid #CFE6D7;
+  border-radius:8px;
+  background:#fff;
+  color:#238B45;
+  box-shadow:0 12px 35px rgba(8,36,81,.16);
+  font-size:10px;
+  font-weight:700;
+  transform:translateY(20px);
+  opacity:0;
+  pointer-events:none;
+  transition:.2s ease;
+}
+.config-toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+.config-toast.error{
+  border-color:#F0C8C8;
+  color:#C62828;
+}
+@media(max-width:950px){
+  .config-grid{grid-template-columns:1fr}
+}
+@media(max-width:700px){
+  .config-page{padding:25px 18px 40px}
+  .config-head{align-items:flex-start;flex-direction:column}
+  .config-head-actions{width:100%}
+  .config-head-actions button{flex:1}
+  .config-form-grid{grid-template-columns:1fr}
+  .config-form-grid label.full{grid-column:auto}
+  .config-actions-grid{grid-template-columns:1fr}
+  .security-panel{grid-template-columns:1fr}
+}

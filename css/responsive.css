@@ -1,0 +1,846 @@
+/* =========================================================
+   SNIC'ELECTRIC
+   RESPONSIVE.CSS
+   Dashboard responsive
+========================================================= */
+
+
+/* =========================================================
+   TABLETS GRANDES
+   Hasta 1200px
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    :root {
+        --sidebar-width: 240px;
+    }
+
+
+    .sidebar {
+        width:
+            var(--sidebar-width);
+    }
+
+
+    .main-content {
+        margin-left:
+            var(--sidebar-width);
+    }
+
+
+    .dashboard-content {
+        padding:
+            25px;
+    }
+
+
+    /* Estadísticas */
+
+    .stats-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    /* Módulos */
+
+    .modules-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    /* Paneles inferiores */
+
+    .dashboard-bottom {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
+
+
+/* =========================================================
+   TABLETS
+   Hasta 992px
+========================================================= */
+
+@media (max-width: 992px) {
+
+
+    /* -----------------------------------------------------
+       SIDEBAR
+    ----------------------------------------------------- */
+
+    .sidebar {
+
+        transform:
+            translateX(-100%);
+
+        transition:
+            transform 0.3s ease;
+
+        box-shadow:
+            10px 0 30px rgba(0,0,0,0.20);
+
+    }
+
+
+    .sidebar.open {
+
+        transform:
+            translateX(0);
+
+    }
+
+
+    /* -----------------------------------------------------
+       CONTENIDO
+    ----------------------------------------------------- */
+
+    .main-content {
+
+        margin-left:
+            0;
+
+    }
+
+
+    /* -----------------------------------------------------
+       BOTÓN MENÚ
+    ----------------------------------------------------- */
+
+    .menu-toggle {
+
+        display:
+            flex;
+
+        align-items:
+            center;
+
+        justify-content:
+            center;
+
+    }
+
+
+    /* -----------------------------------------------------
+       TOPBAR
+    ----------------------------------------------------- */
+
+    .topbar {
+
+        padding:
+            0 22px;
+
+    }
+
+
+    .topbar-title {
+
+        margin-right:
+            auto;
+
+        margin-left:
+            15px;
+
+    }
+
+
+    /* -----------------------------------------------------
+       BIENVENIDA
+    ----------------------------------------------------- */
+
+    .welcome-section {
+
+        min-height:
+            160px;
+
+    }
+
+
+    .welcome-icon {
+
+        width:
+            80px;
+
+        height:
+            80px;
+
+        font-size:
+            34px;
+
+    }
+
+
+    /* -----------------------------------------------------
+       ESTADÍSTICAS
+    ----------------------------------------------------- */
+
+    .stats-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    /* -----------------------------------------------------
+       MÓDULOS
+    ----------------------------------------------------- */
+
+    .modules-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+/* =========================================================
+   TABLETS PEQUEÑAS
+   Hasta 768px
+========================================================= */
+
+@media (max-width: 768px) {
+
+
+    /* -----------------------------------------------------
+       DASHBOARD
+    ----------------------------------------------------- */
+
+    .dashboard-content {
+
+        padding:
+            20px;
+
+    }
+
+
+    /* -----------------------------------------------------
+       TOPBAR
+    ----------------------------------------------------- */
+
+    .topbar {
+
+        height:
+            70px;
+
+        padding:
+            0 18px;
+
+    }
+
+
+    .topbar-title span {
+
+        display:
+            none;
+
+    }
+
+
+    .topbar-title h1 {
+
+        font-size:
+            18px;
+
+    }
+
+
+    .topbar-date {
+
+        display:
+            none;
+
+    }
+
+
+    /* -----------------------------------------------------
+       BIENVENIDA
+    ----------------------------------------------------- */
+
+    .welcome-section {
+
+        padding:
+            25px;
+
+    }
+
+
+    .welcome-section h2 {
+
+        font-size:
+            21px;
+
+    }
+
+
+    .welcome-section p {
+
+        max-width:
+            500px;
+
+        font-size:
+            10px;
+
+    }
+
+
+    .welcome-icon {
+
+        width:
+            70px;
+
+        height:
+            70px;
+
+        font-size:
+            28px;
+
+    }
+
+
+    /* -----------------------------------------------------
+       ESTADÍSTICAS
+    ----------------------------------------------------- */
+
+    .stats-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap:
+            12px;
+
+    }
+
+
+    .stat-card {
+
+        min-height:
+            105px;
+
+        padding:
+            15px;
+
+    }
+
+
+    .stat-icon {
+
+        width:
+            45px;
+
+        height:
+            45px;
+
+        font-size:
+            18px;
+
+    }
+
+
+    .stat-info strong {
+
+        font-size:
+            23px;
+
+    }
+
+
+    /* -----------------------------------------------------
+       MÓDULOS
+    ----------------------------------------------------- */
+
+    .modules-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap:
+            12px;
+
+    }
+
+
+    .module-card {
+
+        min-height:
+            135px;
+
+        padding:
+            16px;
+
+    }
+
+
+    .module-icon {
+
+        width:
+            42px;
+
+        height:
+            42px;
+
+        font-size:
+            17px;
+
+    }
+
+
+    .module-card h3 {
+
+        font-size:
+            12px;
+
+    }
+
+
+    .module-card p {
+
+        font-size:
+            9px;
+
+    }
+
+
+    /* -----------------------------------------------------
+       PANELES
+    ----------------------------------------------------- */
+
+    .dashboard-bottom {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
+
+
+/* =========================================================
+   CELULARES
+   Hasta 576px
+========================================================= */
+
+@media (max-width: 576px) {
+
+
+    /* -----------------------------------------------------
+       CONTENIDO
+    ----------------------------------------------------- */
+
+    .dashboard-content {
+
+        padding:
+            14px;
+
+    }
+
+
+    /* -----------------------------------------------------
+       TOPBAR
+    ----------------------------------------------------- */
+
+    .topbar {
+
+        height:
+            65px;
+
+        padding:
+            0 14px;
+
+    }
+
+
+    .menu-toggle {
+
+        width:
+            38px;
+
+        height:
+            38px;
+
+    }
+
+
+    .topbar-title {
+
+        margin-left:
+            10px;
+
+    }
+
+
+    .topbar-title h1 {
+
+        font-size:
+            16px;
+
+    }
+
+
+    .small-avatar {
+
+        width:
+            34px;
+
+        height:
+            34px;
+
+        font-size:
+            10px;
+
+    }
+
+
+    /* -----------------------------------------------------
+       BIENVENIDA
+    ----------------------------------------------------- */
+
+    .welcome-section {
+
+        min-height:
+            185px;
+
+        padding:
+            22px;
+
+        align-items:
+            flex-start;
+
+    }
+
+
+    .welcome-section h2 {
+
+        font-size:
+            19px;
+
+    }
+
+
+    .welcome-section p {
+
+        max-width:
+            260px;
+
+        font-size:
+            9px;
+
+        line-height:
+            1.6;
+
+    }
+
+
+    .welcome-icon {
+
+        position:
+            absolute;
+
+        right:
+            15px;
+
+        bottom:
+            15px;
+
+        width:
+            58px;
+
+        height:
+            58px;
+
+        font-size:
+            23px;
+
+    }
+
+
+    /* -----------------------------------------------------
+       ESTADÍSTICAS
+    ----------------------------------------------------- */
+
+    .stats-grid {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            10px;
+
+    }
+
+
+    .stat-card {
+
+        min-height:
+            90px;
+
+    }
+
+
+    /* -----------------------------------------------------
+       ENCABEZADOS
+    ----------------------------------------------------- */
+
+    .section-header {
+
+        margin-top:
+            25px;
+
+    }
+
+
+    .section-header h2 {
+
+        font-size:
+            16px;
+
+    }
+
+
+    /* -----------------------------------------------------
+       MÓDULOS
+    ----------------------------------------------------- */
+
+    .modules-grid {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            10px;
+
+    }
+
+
+    .module-card {
+
+        min-height:
+            110px;
+
+    }
+
+
+    .module-card p {
+
+        max-width:
+            100%;
+
+    }
+
+
+    /* -----------------------------------------------------
+       PANELES
+    ----------------------------------------------------- */
+
+    .dashboard-bottom {
+
+        gap:
+            12px;
+
+    }
+
+
+    .panel-header {
+
+        padding:
+            16px;
+
+    }
+
+
+    .profile-summary {
+
+        padding:
+            20px;
+
+    }
+
+
+    /* -----------------------------------------------------
+       TOAST
+    ----------------------------------------------------- */
+
+    .dashboard-toast {
+
+        left:
+            14px;
+
+        right:
+            14px;
+
+        bottom:
+            14px;
+
+        max-width:
+            none;
+
+    }
+
+}
+
+
+/* =========================================================
+   CELULARES MUY PEQUEÑOS
+   Hasta 400px
+========================================================= */
+
+@media (max-width: 400px) {
+
+
+    .dashboard-content {
+
+        padding:
+            10px;
+
+    }
+
+
+    .topbar {
+
+        padding:
+            0 10px;
+
+    }
+
+
+    .topbar-title h1 {
+
+        font-size:
+            14px;
+
+    }
+
+
+    .welcome-section {
+
+        padding:
+            18px;
+
+    }
+
+
+    .welcome-section h2 {
+
+        font-size:
+            17px;
+
+    }
+
+
+    .welcome-section p {
+
+        font-size:
+            8px;
+
+    }
+
+
+    .stat-card {
+
+        padding:
+            13px;
+
+    }
+
+
+    .module-card {
+
+        padding:
+            14px;
+
+    }
+
+
+    .module-card h3 {
+
+        font-size:
+            11px;
+
+    }
+
+
+    .module-card p {
+
+        font-size:
+            8px;
+
+    }
+
+}
+
+
+/* =========================================================
+   OVERLAY PARA MENÚ MÓVIL
+========================================================= */
+
+@media (max-width: 992px) {
+
+
+    body.sidebar-open::before {
+
+        content: "";
+
+        position:
+            fixed;
+
+        inset:
+            0;
+
+        background:
+            rgba(0,0,0,0.45);
+
+        z-index:
+            900;
+
+    }
+
+
+    .sidebar {
+
+        z-index:
+            1000;
+
+    }
+
+}
+
+
+/* =========================================================
+   REDUCIR ANIMACIONES
+   Para usuarios que lo prefieren
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            0.01ms !important;
+
+        scroll-behavior:
+            auto !important;
+
+    }
+
+}
