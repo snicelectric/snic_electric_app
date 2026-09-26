@@ -258,15 +258,15 @@ async function cargarMatrizPermisos(rolIdSeleccionado = null) {
 
   try {
     if (todosLosPermisosBD.length === 0) {
-      /*const { data: permisos, error: errPermisos } = await window.supabaseClient
+      const { data: permisos, error: errPermisos } = await window.supabaseClient
         .from('permisos')
         .select('id,codigo,nombre,modulo,accion,descripcion')
         .order('modulo', { ascending: true })
-        .order('accion', { ascending: true });*/
-        const { data, error } = await supabase
+        .order('accion', { ascending: true });
+        /*const { data, error } = await supabase
         .from('permisos')
         .select('id, codigo, descripcion')
-        .order('codigo', { ascending: true });
+        .order('codigo', { ascending: true });*/
 
       if (errPermisos) throw errPermisos;
       todosLosPermisosBD = permisos || [];
