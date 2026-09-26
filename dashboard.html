@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Dashboard | SNIC'ELECTRIC
+    </title>
+
+    <!-- Google Font -->
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="icon" href="https://github.com/Francisco1824/proyectosnicelectric/blob/main/img/logo.png?raw=true" />
+
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+    <!-- CSS -->
+    
+  
+    <link
+        rel="stylesheet"
+        href="css/app-v2.css"
+    >
+
+
+    
+    <link
+        rel="stylesheet"
+        href="css/dashboard.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/responsive.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="app-shell">
+        <!-- =================================================
+            SIDEBAR
+        ================================================== -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo"><img src="https://github.com/Francisco1824/snic_electric_app/blob/main/img/logo.png?raw=true" alt="SNIC'ELECTRIC"><div><strong>SNIC'ELECTRIC</strong><span>Administración</span></div></div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item active" data-permission="inicio.ver"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
+                <a href="admin/clientes.html" class="nav-item" data-permission="clientes.ver"><i class="fa-solid fa-users"></i><span>Clientes</span></a>
+                <a href="admin/inventario.html" class="nav-item" data-permission="inventario.ver"><i class="fa-solid fa-boxes-stacked"></i><span>Inventario</span></a>
+                <a href="admin/cotizaciones.html" class="nav-item" data-permission="cotizaciones.ver"><i class="fa-solid fa-file-signature"></i><span>Cotizaciones</span></a>
+                <a href="admin/facturas.html" class="nav-item" data-permission="facturas.ver"><i class="fa-solid fa-file-invoice-dollar"></i><span>Facturas</span></a>
+                <a href="admin/ordenes.html" class="nav-item" data-permission="ordenes.ver"><i class="fa-solid fa-clipboard-list"></i><span>Órdenes de servicio</span></a>
+                <a href="admin/inspecciones.html" class="nav-item" data-permission="inspecciones.ver"><i class="fa-solid fa-magnifying-glass-chart"></i><span>Inspecciones</span></a>
+                <a href="admin/informe-obra.html" class="nav-item" data-permission="informe_obra.ver"><i class="fa-solid fa-file-lines"></i><span>Informe de obra</span></a>
+                <a href="admin/informes.html" class="nav-item" data-permission="informes.ver"><i class="fa-solid fa-chart-column"></i><span>Informes</span></a>
+            <div class="nav-divider"></div>
+                <a href="admin/administracion.html" class="nav-item" data-permission="administracion.ver"><i class="fa-solid fa-user-shield"></i><span>Administración</span></a>
+                <a href="admin/configuracion.html" class="nav-item " data-permission="configuracion.ver"><i class="fa-solid fa-gear"></i><span>Configuración</span></a>
+            </nav>
+        <div class="sidebar-bottom"><button type="button" class="logout-button" data-logout><i class="fa-solid fa-right-from-bracket"></i><span>Cerrar sesión</span></button></div>
+    </aside>
+
+<!-- =====================================================
+     CONTENIDO PRINCIPAL
+===================================================== -->
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+            <button type="button" class="menu-toggle" data-menu-toggle aria-label="Abrir menú"><i class="fa-solid fa-bars"></i></button>
+            <div class="topbar-title"><span>Gestión administrativa</span><h1>Inicio</h1></div>
+            <div class="topbar-user">
+                <div class="topbar-user-info"><strong data-user-name>Usuario</strong><span data-user-role>-</span></div>
+                <div class="user-avatar" id="topbarAvatar" aria-label="Avatar del usuario">US</div>
+            </div>
+        </header>
+
+
+        <!-- CONTENIDO -->
+
+        <section class="dashboard-content">
+
+
+            <!-- BIENVENIDA -->
+
+            <div class="welcome-section">
+                <div>
+                    <span class="welcome-label" data-greeting >Bienvenido</span>
+                    <h2><span data-user-name>Usuario</span></h2>
+                    <p>Este es el centro de gestión administrativa de SNIC'ELECTRIC.</p>
+                </div>
+                <div class="welcome-icon">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+            </div>
+
+            <!-- ESTADÍSTICAS -->
+
+            <div class="stats-grid">
+                <div class="stat-card" data-permission="clientes.ver">
+                    <div class="stat-icon blue">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span>Clientes</span>
+                        <strong id="totalClientes">0</strong>
+                    </div>
+                </div>
+                <div class="stat-card productos-stat-card" data-permission="inventario.ver">
+                    <div class="stat-icon purple">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-label">Productos</span>
+                        <strong id="totalProductos" class="stat-number">0</strong>
+                        <div id="productosPorCategoria" class="productos-categorias">
+                            Cargando categorías...
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card" data-permission="cotizaciones.ver">
+                    <div class="stat-icon green">
+                        <i class="fa-solid fa-file-signature"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span>Cotizaciones</span>
+                        <strong id="totalCotizaciones">0</strong>
+                    </div>
+                </div>
+
+
+                <div class="stat-card" data-permission="facturas.ver">
+                    <div class="stat-icon red">
+                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span>Facturas</span>
+                        <strong id="totalFacturas">0</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MÓDULOS -->
+
+            <div class="section-header">
+                <div>
+                    <span>Acceso rápido</span>
+                    <h2>Módulos del sistema</h2>
+                </div>
+            </div>            
+            <div class="modules-grid">
+
+                <!-- CLIENTES -->
+
+                <a href="admin/clientes.html" class="module-card" data-permission="clientes.ver">
+                    <div class="module-icon blue">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div>
+                        <h3>Clientes</h3>
+                        <p>Gestión de clientes y contactos.</p>
+                    </div>
+                    <i class="fa-solid fa-arrow-right module-arrow"></i>
+                </a>
+
+                <!-- INVENTARIO -->
+
+                <a href="admin/inventario.html" class="module-card" data-permission="inventario.ver">
+                    <div class="module-icon yellow">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                    </div>
+                    <div>
+                        <h3>Inventario</h3>
+                        <p>Productos, materialesy existencias.</p>
+                    </div>
+                    <i class="fa-solid fa-arrow-right module-arrow"></i>
+                </a>
+
+                <!-- COTIZACIONES -->
+
+                <a href="admin/cotizaciones.html" class="module-card" data-permission="cotizaciones.ver">
+                    <div class="module-icon blue">
+                        <i class="fa-solid fa-file-signature"></i>
+                    </div>
+                    <div>
+                        <h3>Cotizaciones</h3>
+                        <p>Crear y administrar cotizaciones.</p>
+                    </div>
+                    <i class="fa-solid fa-arrow-right module-arrow"></i>
+                </a>
+
+                <!-- FACTURAS -->
+
+                <a href="admin/facturas.html" class="module-card" data-permission="facturas.ver">
+                    <div class="module-icon yellow">
+                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                    </div>
+                    <div>
+                        <h3>Facturas</h3>
+                        <p>Facturación y seguimiento.</p>
+                    </div>
+                    <i class="fa-solid fa-arrow-right module-arrow"></i>
+                </a>
+
+                <!-- ORDENES -->
+
+                <a href="admin/ordenes.html" class="module-card" data-permission="ordenes.ver">
+                    <div class="module-icon blue">
+                        <i class="fa-solid fa-clipboard-list"></i>
+                    </div>
+                    <div>
+                        <h3>Orden de servicio</h3>
+                        <p>Gestión de órdenes de trabajo.</p>
+                    </div>
+                    <i class="fa-solid fa-arrow-right module-arrow"></i>
+                </a>
+
+                <!-- INSPECCIONES -->
+
+                <a href="admin/inspecciones.html" class="module-card" data-permission="inspecciones.ver">
+                    <div class="module-icon yellow">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i>
+                    </div>
+                    <div>
+                        <h3>Inspecciones</h3>
+                        <p>Inspecciones eléctricas.</p>
+                    </div>
+                    <i class="fa-solid fa-arrow-right module-arrow"></i>
+                </a>
+
+                <!-- INFORME DE OBRA -->
+
+                <a href="admin/informe-obra.html" class="module-card" data-permission="informe_obra.ver">
+                    <div class="module-icon blue">
+                        <i class="fa-solid fa-helmet-safety"></i>
+                    </div>
+                    <div>
+                        <h3>Informe de obra</h3>
+                        <p>Actividades realizadas por el técnico.</p>
+                    </div>
+                    <i class="fa-solid fa-arrow-right module-arrow"></i>
+                </a>
+
+                <!-- INFORMES -->
+
+                <a href="admin/informes.html"
+                    class="module-card"
+                    data-permission="informes.ver">
+                    <div class="module-icon yellow">
+                        <i class="fa-solid fa-chart-column"></i>
+                    </div>
+                    <div>
+                        <h3>Informes</h3>
+                        <p>Informes mensuales y trimestrales.</p>
+                    </div>
+                    <i class="fa-solid fa-arrow-right module-arrow"></i>
+                </a>
+
+                <!-- ADMINISTRACIÓN -->
+
+                <a href="admin/administracion.html" class="module-card" data-permission="administracion.ver">
+                    <div class="module-icon blue">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <div>
+                        <h3>Administración</h3>
+                        <p>Usuarios, roles y permisos.</p>
+                    </div>
+                    <i class="fa-solid fa-arrow-right module-arrow"></i>
+                </a>
+
+                <!-- CONFIGURACIÓN -->
+
+                <a href="admin/configuracion.html" class="module-card" data-permission="configuracion.ver">
+                    <div class="module-icon yellow">
+                        <i class="fa-solid fa-gear"></i>
+                    </div>
+                    <div>
+                        <h3>Configuración</h3>
+                        <p>Configuración general del sistema.</p>
+                    </div>
+                    <i class="fa-solid fa-arrow-right module-arrow"></i>
+                </a>
+            </div>
+
+            <!-- ACTIVIDAD RECIENTE -->
+
+            <div class="dashboard-bottom">
+                <div class="activity-panel">
+                    <div class="panel-header">
+                        <div>
+                            <span>Sistema</span>
+                            <h2>Actividad reciente</h2>
+                        </div>
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                    </div>
+                    <div class="activity-list" id="activityList">
+                        <div class="empty-state">
+                            <i class="fa-solid fa-inbox"></i>
+                            <p>No hay actividad reciente.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RESUMEN -->
+
+                <div class="summary-panel">
+                    <div class="panel-header">
+                        <div>
+                            <span>Cuenta</span>
+                            <h2>Mi perfil</h2>
+                        </div>
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="profile-summary">
+                        <div class="profile-large-avatar">
+                            <span id="profileAvatar" aria-label="Avatar del usuario">US</span>
+                        </div>
+                        <h3 class="profile-name" data-user-name>Usuario</h3>
+                        <span class="profile-role" data-user-role>Usuario</span>
+                        <p data-user-email>-</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/dashboard.js"></script>
+
+</body>
+
+</html>
