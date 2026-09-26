@@ -1501,39 +1501,69 @@ body.dark-mode {
         RESPONSIVE V2.1
 ======================================================*/
 
+/* Muestra el botón hamburguesa en pantallas móviles */
 @media (max-width: 768px) {
-  .toast {
-    right: 15px;
-
-    left: 15px;
-
-    min-width: auto;
-
-    max-width: none;
+  .menu-toggle {
+    display: block; /* Muestra el botón de hamburguesa */
+    font-size: 26px;
+    background: none;
+    border: none;
+    color: var(--primary);
+    cursor: pointer;
+    z-index: 1000;
   }
 
-  .back-to-top {
-    width: 52px;
-
-    height: 52px;
-
-    bottom: 92px;
-
-    right: 18px;
+  /* Transforma la barra de navegación en un menú desplegable/flotante */
+  .navbar {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--white);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out, opacity 0.3s ease;
+    opacity: 0;
   }
 
-  .cerrar {
-    top: 20px;
+  /* Clase activa que despliega el menú cuando se presiona la hamburguesa */
+  .navbar.active {
+    max-height: 450px; /* Ajusta según el tamaño de tus ítems */
+    opacity: 1;
+  }
 
-    right: 25px;
+  .navbar ul {
+    flex-direction: column;
+    gap: 0;
+    padding: 15px 0;
+  }
 
-    font-size: 38px;
+  .navbar li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .navbar a {
+    display: block;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .navbar a::after {
+    display: none; /* Desactiva la barra animada inferior en móvil */
+  }
+
+  .navbar .nav-login {
+    margin: 10px auto;
+    display: inline-flex;
   }
 }
 
 @media (max-width: 480px) {
   .lightbox img {
-    max-width: 95%;
+    max-width: 80%;
   }
 }
 
