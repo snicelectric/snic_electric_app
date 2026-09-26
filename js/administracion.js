@@ -259,17 +259,26 @@ async function cargarMatrizPermisos(rolIdSeleccionado = null) {
   try {
     if (todosLosPermisosBD.length === 0) {
       const { data: permisos, error: errPermisos } = await window.supabaseClient
-        /*.from('permisos')
-        .select('id,codigo,nombre,modulo,accion,descripcion')
-        .order('modulo', { ascending: true })
-        .order('accion', { ascending: true });
-        const { data, error } = await supabase*/
         .from('permisos')
-        .select('id, codigo, descripcion')
+        .select('id,codigo,descripcion')
         .order('codigo', { ascending: true });
 
+      // La tabla permisos actual del proyecto contiene id, codigo y descripcion.
+      // Derivamos modulo/accion/nombre desde codigo para mantener la matriz visual.
+
       if (errPermisos) throw errPermisos;
-      todosLosPermisosBD = permisos || [];
+      todosLosPermisosBD = (permisos || []).map(p => {
+        const codigo = String(p.codigo || '');
+        const partes = codigo.split('.');
+        const modulo = partes[0] || 'General';
+        const accion = partes.slice(1).join('.') || codigo || 'Permiso';
+        return {
+          ...p,
+          modulo,
+          accion,
+          nombre: accion
+        };
+      });
     }
 
     const { data: asignaciones, error: errAsig } = await window.supabaseClient
@@ -382,14 +391,23 @@ window.guardarCambioPermisoBD = async function(rolId, permisoId, estaMarcado) {
 async function cargarPerfiles() {
   try {
     console.log('📥 Cargando perfiles desde Supabase...');
+    // No usamos relaciones embebidas de PostgREST aquí.
+    // El proyecto tuvo una relación antigua "user_roles" en la caché de PostgREST,
+    // por lo que el select con roles!fk_perfiles_roles puede devolver 404 aunque
+    // la FK real de la base de datos sea perfiles.rol_id -> roles.id.
     const { data: perfiles, error } = await window.supabaseClient
       .from('perfiles')
-      .select('*, roles(id,nombre)')
+      .select('*')
       .order('created_at', { ascending: false });
 
     if (error) throw error;
 
-    todosLosPerfiles = perfiles || [];
+    // Los roles ya fueron cargados por cargarRoles(). Los asociamos en memoria
+    // usando perfiles.rol_id, evitando cualquier dependencia de relaciones REST.
+    todosLosPerfiles = (perfiles || []).map(perfil => ({
+      ...perfil,
+      roles: todosLosRoles.find(rol => rol.id === perfil.rol_id) || null
+    }));
     console.log(`✅ ${todosLosPerfiles.length} perfiles cargados:`, todosLosPerfiles);
     renderizarTabla(todosLosPerfiles);
     actualizarEstadisticas(todosLosPerfiles);
