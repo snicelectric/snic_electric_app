@@ -9,6 +9,7 @@
   "background_color": "#ffffff",
   "theme_color": "#0d6efd",
   "orientation": "portrait-primary",
+  "dir": "ltr",
   "lang": "es-CO",
   "categories": ["business", "utilities", "productivity"],
   "icons": [
