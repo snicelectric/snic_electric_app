@@ -1,4 +1,5 @@
 {
+  "id": "/snic_electric_app/",
   "name": "SNIC Electric App",
   "short_name": "SNIC Electric",
   "description": "Aplicación de gestión de servicios eléctricos, cotizaciones, proyectos y cálculos solares fotovoltaicos.",
