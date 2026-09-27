@@ -5,12 +5,15 @@
   "description": "Aplicación de gestión de servicios eléctricos, cotizaciones, proyectos y cálculos solares fotovoltaicos.",
   "start_url": "/snic_electric_app/",
   "scope": "/snic_electric_app/",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#0d6efd",
   "orientation": "portrait-primary",
   "dir": "ltr",
   "lang": "es-CO",
+  "prefer_related_applications": false,
+  "related_applications": [],
   "categories": ["business", "utilities", "productivity"],
   "icons": [
     {
